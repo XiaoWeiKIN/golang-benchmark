@@ -1,0 +1,14 @@
+# 编译产物
+*.exe
+*.test
+*.out
+
+# profile 产物
+*.pprof
+prof/
+.bench/
+
+# 编辑器 / 系统
+.DS_Store
+.idea/
+.vscode/
