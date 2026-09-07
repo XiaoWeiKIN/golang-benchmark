@@ -65,7 +65,7 @@ topics/<NN>-<slug>/
 | | 专题 | 核心问题 | 状态 |
 |---|---|---|---|
 | 01 | [逃逸分析](topics/01-escape-analysis/) | 一个对象凭什么留在栈上 | ✅ |
-| 02 | slice 扩容与预分配 | `append` 的增长曲线，`make` 该给多少 cap | 待写 |
+| 02 | [slice 扩容与预分配](topics/02-slice-growth/) | `append` 的增长曲线，`make` 该给多少 cap | ✅ |
 | 03 | map 的实现与预分配 | Go 1.24 换成 Swiss Table 之后变了什么 | 待写 |
 | 04 | string 与 []byte | 转换何时拷贝，`unsafe.String` 的边界 | 待写 |
 | 05 | sync.Pool | 复用怎么和 GC、P 本地缓存配合，什么时候反而更慢 | 待写 |
