@@ -66,8 +66,9 @@ asm:
 ## frames: 按栈帧大小列出包内所有函数，快速定位谁在栈上开了大块
 .PHONY: frames
 frames:
-	@go build -gcflags='-S' $(PKG) 2>&1 | grep STEXT \
-	  | sed -E 's/.*\.([A-Za-z0-9_]+) STEXT.*locals=0x([0-9a-f]+).*/\2 \1/' \
+	@go build -gcflags='-S' $(PKG) 2>&1 | grep STEXT | grep 'locals=0x' \
+	  | sed -E 's/.*[./]([A-Za-z0-9_]+) STEXT.*locals=0x([0-9a-f]+).*/\2 \1/' \
+	  | grep -E '^[0-9a-f]+ ' \
 	  | while read -r hex name; do printf '%8d  %s\n' "$$((16#$$hex))" "$$name"; done \
 	  | sort -rn
 
