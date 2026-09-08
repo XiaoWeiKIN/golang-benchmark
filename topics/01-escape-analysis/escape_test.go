@@ -188,3 +188,21 @@ func BenchmarkVerify_Closure2Vars(b *testing.B) {
 		MakeAccumulator2()
 	}
 }
+
+// --- 噪声地板对照组（METHODOLOGY 原则 6）--------------------------------------
+//
+// 两个被测函数的函数体逐字相同，测出来的差距就是这批数据的分辨率下限。
+
+func BenchmarkNoiseFloor_A(b *testing.B) {
+	b.ReportAllocs()
+	for b.Loop() {
+		SumConstLenBuf()
+	}
+}
+
+func BenchmarkNoiseFloor_B(b *testing.B) {
+	b.ReportAllocs()
+	for b.Loop() {
+		SumConstLenBufNoise()
+	}
+}

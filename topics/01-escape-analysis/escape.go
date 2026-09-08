@@ -227,3 +227,23 @@ func MakeAccumulator2() func(int) (int, int) {
 		return a, b
 	}
 }
+
+// ---------------------------------------------------------------------------
+// 噪声地板对照组（METHODOLOGY 原则 6）
+//
+// SumConstLenBufNoise 的函数体和 SumConstLenBuf 逐字相同。两个完全一样的函数
+// 分别测出来差多少，就是这批数据的分辨率下限 —— 小于这个数的差异不该被解释。
+// ---------------------------------------------------------------------------
+
+//go:noinline
+func SumConstLenBufNoise() int {
+	buf := make([]byte, 64)
+	for i := range buf {
+		buf[i] = byte(i)
+	}
+	total := 0
+	for _, v := range buf {
+		total += int(v)
+	}
+	return total
+}
