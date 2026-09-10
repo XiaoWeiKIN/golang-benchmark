@@ -13,15 +13,21 @@ BENCH     ?= .
 COUNT     ?= 8
 BENCHTIME ?= 1s
 FUNC      ?=
+# GOEXP 给 go test 加一个 GOEXPERIMENT 前缀，用来在两种运行时实现之间做 A/B。
+# 例：make bench TOPIC=03-map-internals GOEXP=noswissmap
+GOEXP     ?=
+# EXP 是 make ab 要对比的那个实验开关
+EXP       ?= noswissmap
 
 PKG      := ./topics/$(TOPIC)
 OUT      := .bench
-NEW      := $(OUT)/$(TOPIC).txt
 BASE     := $(OUT)/$(TOPIC).base.txt
 BENCHSTAT := $(shell go env GOPATH)/bin/benchstat
 
 # -benchmem 给出每次操作的分配字节数和分配次数，是本仓库最关心的两列。
-GOTEST := go test -run '^$$' -bench '$(BENCH)' -benchmem -count=$(COUNT) -benchtime=$(BENCHTIME)
+GOARGS := -run '^$$' -bench '$(BENCH)' -benchmem -count=$(COUNT) -benchtime=$(BENCHTIME)
+GOTEST := $(if $(GOEXP),GOEXPERIMENT=$(GOEXP) )go test $(GOARGS)
+NEW     := $(OUT)/$(TOPIC)$(if $(GOEXP),.$(GOEXP)).txt
 
 .DEFAULT_GOAL := help
 
@@ -44,6 +50,14 @@ cmp: | $(OUT) $(BENCHSTAT)
 	$(GOTEST) $(PKG) | tee $(NEW)
 	@echo
 	@$(BENCHSTAT) $(BASE) $(NEW)
+
+## ab: 同一组基准在两种运行时实现下各跑一遍并对比（默认对比 GOEXPERIMENT=noswissmap）
+.PHONY: ab
+ab: | $(OUT) $(BENCHSTAT)
+	go test $(GOARGS) $(PKG) | tee $(OUT)/$(TOPIC).default.txt
+	GOEXPERIMENT=$(EXP) go test $(GOARGS) $(PKG) | tee $(OUT)/$(TOPIC).$(EXP).txt
+	@echo
+	@$(BENCHSTAT) default=$(OUT)/$(TOPIC).default.txt $(EXP)=$(OUT)/$(TOPIC).$(EXP).txt
 
 ## escape: 打印逃逸分析决策（-l 关内联，看"纯"逃逸结论）
 .PHONY: escape
@@ -112,3 +126,4 @@ help:
 	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/^## /  /'
 	@echo
 	@echo "  变量：TOPIC(=$(TOPIC)) BENCH(=$(BENCH)) COUNT(=$(COUNT)) BENCHTIME(=$(BENCHTIME))"
+	@echo "        GOEXP(=$(GOEXP)) EXP(=$(EXP))"
