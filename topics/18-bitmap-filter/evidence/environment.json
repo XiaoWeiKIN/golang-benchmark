@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-09-16T06:13:37.896468+00:00",
+  "base_revision": "38f712d7c0ca29fd1318a4f25f1b8d23a6a4c22b",
+  "state": "uncommitted new topic; source SHA-256 below identifies measured files",
+  "command": "go test ./topics/18-bitmap-filter -run '^$' -bench . -benchmem -cpu=1 -count=8 -benchtime=100ms",
+  "go": "go version go1.25.4 darwin/arm64",
+  "os": "macOS-15.7.3-arm64-arm-64bit",
+  "cpu": "Apple M4",
+  "logical_cpus": "10",
+  "goenv": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "arm64",
+    "GOEXPERIMENT": "",
+    "GOOS": "darwin"
+  },
+  "subject_files": {
+    "topics/18-bitmap-filter/bitmap.go": "08d83df891ef4a1d5078903c1b6900d5c4ccad4338fb6e348e156a03ad0bde61",
+    "topics/18-bitmap-filter/bitmap_test.go": "b7a9a2f195396f034916e2945c88e755b7b344451d6ae03015d44870d2989c77",
+    "go.mod": "5b390c7098f1b622184be63a136aaaa00a32167abc71c454b35f56fabc4529e6"
+  }
+}

@@ -1,0 +1,41 @@
+$ go test -v ./topics/18-bitmap-filter
+=== RUN   TestByteSet
+--- PASS: TestByteSet (0.00s)
+=== RUN   TestStringSet
+--- PASS: TestStringSet (0.02s)
+=== RUN   TestFalsePositives
+--- PASS: TestFalsePositives (0.00s)
+=== RUN   TestVerify_CandidateRates
+--- PASS: TestVerify_CandidateRates (0.01s)
+=== RUN   TestLayout
+    bitmap_test.go:284: ByteSet=32 B, bool array=256 B, StringSet=8216 B (map storage excluded)
+--- PASS: TestLayout (0.00s)
+=== RUN   FuzzStringSet
+=== RUN   FuzzStringSet/seed#0
+=== RUN   FuzzStringSet/seed#1
+--- PASS: FuzzStringSet (0.00s)
+    --- PASS: FuzzStringSet/seed#0 (0.00s)
+    --- PASS: FuzzStringSet/seed#1 (0.00s)
+PASS
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter	0.398s
+
+$ go test -race ./topics/18-bitmap-filter
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter	1.545s
+
+$ go test ./topics/18-bitmap-filter -run '^$' -fuzz '^FuzzStringSet$' -fuzztime=5s -parallel=1
+fuzz: elapsed: 0s, gathering baseline coverage: 0/2 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 2/2 completed, now fuzzing with 1 workers
+fuzz: elapsed: 3s, execs: 142437 (47462/sec), new interesting: 6 (total: 8)
+fuzz: elapsed: 5s, execs: 266267 (60068/sec), new interesting: 6 (total: 8)
+PASS
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter	5.468s
+
+$ make check
+go vet ./...
+go test ./...
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/01-escape-analysis	2.078s [no tests to run]
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/02-slice-growth	1.814s
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/03-map-internals	2.242s
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/04-strings	0.656s
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/15-rcu-cache	1.149s
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter	0.753s

@@ -1,0 +1,14 @@
+$HOME/go/bin/benchstat: go1.26.8
+	path	golang.org/x/perf/cmd/benchstat
+	mod	golang.org/x/perf	v0.0.0-20260825160852-19be9d8e6c70	h1:M+kM03JKR23KkrutTue5KEQYDSbZTZTJ4FJ1v5zYrHM=
+	dep	github.com/aclements/go-moremath	v0.0.0-20210112150236-f10218a38794	h1:xlwdaKcTNVW4PtpQb8aKA4Pjy0CdJHEqvFbAnvR5m2g=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=arm64
+	build	GOOS=darwin
+	build	GOARM64=v8.0

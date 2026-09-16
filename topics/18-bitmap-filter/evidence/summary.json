@@ -1,0 +1,2018 @@
+{
+  "BenchmarkByteMembership/Bitmap": {
+    "samples": 8,
+    "median_ns": 1.842,
+    "min_ns": 1.84,
+    "max_ns": 2.294,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkByteMembership/BoolArray": {
+    "samples": 8,
+    "median_ns": 1.866,
+    "min_ns": 1.861,
+    "max_ns": 1.905,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkByteMembership/Map": {
+    "samples": 8,
+    "median_ns": 9.3385,
+    "min_ns": 9.053,
+    "max_ns": 9.583,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkByteMembership/MapNoise": {
+    "samples": 8,
+    "median_ns": 9.503,
+    "min_ns": 9.349,
+    "max_ns": 9.989,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 6.978,
+    "min_ns": 6.942,
+    "max_ns": 7.097,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.022,
+    "min_ns": 6.921,
+    "max_ns": 7.165,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 1.9965000000000002,
+    "min_ns": 1.994,
+    "max_ns": 2.0,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 2.762,
+    "min_ns": 2.748,
+    "max_ns": 2.781,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 7.4695,
+    "min_ns": 7.392,
+    "max_ns": 7.568,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.4719999999999995,
+    "min_ns": 7.461,
+    "max_ns": 7.495,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 7.8985,
+    "min_ns": 7.78,
+    "max_ns": 8.15,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 2.7424999999999997,
+    "min_ns": 2.741,
+    "max_ns": 2.784,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 7.074999999999999,
+    "min_ns": 6.972,
+    "max_ns": 7.219,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 6.9725,
+    "min_ns": 6.966,
+    "max_ns": 7.024,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 7.26,
+    "min_ns": 7.227,
+    "max_ns": 7.386,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 8.9465,
+    "min_ns": 8.889,
+    "max_ns": 8.998,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 7.8614999999999995,
+    "min_ns": 7.747,
+    "max_ns": 8.022,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.734500000000001,
+    "min_ns": 7.715,
+    "max_ns": 7.927,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 8.8555,
+    "min_ns": 8.414,
+    "max_ns": 10.82,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 9.842,
+    "min_ns": 9.689,
+    "max_ns": 10.08,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 10.43,
+    "min_ns": 10.37,
+    "max_ns": 12.36,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.455,
+    "min_ns": 10.36,
+    "max_ns": 10.54,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 6.7025,
+    "min_ns": 6.623,
+    "max_ns": 6.991,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 4.0615,
+    "min_ns": 4.012,
+    "max_ns": 7.491,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 7.2645,
+    "min_ns": 6.966,
+    "max_ns": 12.28,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 6.9955,
+    "min_ns": 6.871,
+    "max_ns": 7.14,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 2.0205,
+    "min_ns": 1.998,
+    "max_ns": 6.765,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 2.8045,
+    "min_ns": 2.752,
+    "max_ns": 2.908,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 20.735,
+    "min_ns": 7.477,
+    "max_ns": 29.3,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 12.365,
+    "min_ns": 9.524,
+    "max_ns": 21.56,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 9.333,
+    "min_ns": 8.731,
+    "max_ns": 13.06,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 3.8455,
+    "min_ns": 3.112,
+    "max_ns": 8.307,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 8.408999999999999,
+    "min_ns": 7.763,
+    "max_ns": 11.98,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.346,
+    "min_ns": 7.091,
+    "max_ns": 8.013,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 7.624499999999999,
+    "min_ns": 7.522,
+    "max_ns": 21.86,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 8.992,
+    "min_ns": 8.724,
+    "max_ns": 9.255,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 7.9485,
+    "min_ns": 7.825,
+    "max_ns": 8.523,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 8.6045,
+    "min_ns": 7.875,
+    "max_ns": 12.17,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 9.5695,
+    "min_ns": 8.783,
+    "max_ns": 11.1,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 10.985,
+    "min_ns": 9.933,
+    "max_ns": 21.84,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 12.015,
+    "min_ns": 10.67,
+    "max_ns": 26.02,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.82,
+    "min_ns": 10.53,
+    "max_ns": 13.05,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 6.791,
+    "min_ns": 6.668,
+    "max_ns": 11.02,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 4.25,
+    "min_ns": 4.121,
+    "max_ns": 4.326,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 9.359,
+    "min_ns": 9.119,
+    "max_ns": 10.9,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 11.375,
+    "min_ns": 10.75,
+    "max_ns": 18.12,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 2.498,
+    "min_ns": 2.339,
+    "max_ns": 2.681,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 3.457,
+    "min_ns": 3.144,
+    "max_ns": 3.704,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 9.7695,
+    "min_ns": 8.687,
+    "max_ns": 10.86,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.21,
+    "min_ns": 10.1,
+    "max_ns": 10.52,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 9.465499999999999,
+    "min_ns": 8.947,
+    "max_ns": 10.13,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 3.1985,
+    "min_ns": 2.899,
+    "max_ns": 6.347,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 9.4145,
+    "min_ns": 8.555,
+    "max_ns": 11.44,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 8.313500000000001,
+    "min_ns": 7.843,
+    "max_ns": 9.149,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 8.759,
+    "min_ns": 8.266,
+    "max_ns": 9.45,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 9.0625,
+    "min_ns": 8.796,
+    "max_ns": 10.04,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 9.055,
+    "min_ns": 8.476,
+    "max_ns": 9.244,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.0665,
+    "min_ns": 8.668,
+    "max_ns": 9.282,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 9.189499999999999,
+    "min_ns": 8.872,
+    "max_ns": 9.334,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 10.265,
+    "min_ns": 9.941,
+    "max_ns": 10.97,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 12.14,
+    "min_ns": 11.73,
+    "max_ns": 13.59,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 11.92,
+    "min_ns": 11.47,
+    "max_ns": 12.61,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 8.0905,
+    "min_ns": 7.633,
+    "max_ns": 8.691,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 4.2925,
+    "min_ns": 4.152,
+    "max_ns": 4.384,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 9.5535,
+    "min_ns": 9.123,
+    "max_ns": 9.63,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.551,
+    "min_ns": 9.218,
+    "max_ns": 25.2,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 2.2955,
+    "min_ns": 2.14,
+    "max_ns": 2.504,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=8/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 3.0895,
+    "min_ns": 2.839,
+    "max_ns": 3.158,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 10.885,
+    "min_ns": 9.367,
+    "max_ns": 11.02,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.635,
+    "min_ns": 8.89,
+    "max_ns": 11.33,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 10.745000000000001,
+    "min_ns": 9.175,
+    "max_ns": 20.77,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=8/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 3.097,
+    "min_ns": 2.908,
+    "max_ns": 3.622,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 7.8735,
+    "min_ns": 7.543,
+    "max_ns": 9.654,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.471,
+    "min_ns": 7.32,
+    "max_ns": 7.626,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 8.131499999999999,
+    "min_ns": 7.765,
+    "max_ns": 9.103,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=8/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 9.584,
+    "min_ns": 8.9,
+    "max_ns": 10.0,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 8.0915,
+    "min_ns": 7.902,
+    "max_ns": 8.48,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 8.4985,
+    "min_ns": 8.113,
+    "max_ns": 8.601,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 9.354,
+    "min_ns": 8.513,
+    "max_ns": 28.7,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=8/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 10.0275,
+    "min_ns": 9.399,
+    "max_ns": 10.43,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 11.83,
+    "min_ns": 11.53,
+    "max_ns": 12.16,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 12.135,
+    "min_ns": 11.74,
+    "max_ns": 12.64,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 8.616499999999998,
+    "min_ns": 8.126,
+    "max_ns": 9.225,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=8/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 4.066,
+    "min_ns": 4.042,
+    "max_ns": 4.184,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 6.901999999999999,
+    "min_ns": 6.677,
+    "max_ns": 7.406,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.1605,
+    "min_ns": 7.007,
+    "max_ns": 8.682,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 2.1425,
+    "min_ns": 2.095,
+    "max_ns": 2.361,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 6.272,
+    "min_ns": 3.489,
+    "max_ns": 30.23,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 14.25,
+    "min_ns": 9.851,
+    "max_ns": 20.18,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 15.645,
+    "min_ns": 13.27,
+    "max_ns": 25.37,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 13.745000000000001,
+    "min_ns": 12.2,
+    "max_ns": 15.68,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 4.782,
+    "min_ns": 4.627,
+    "max_ns": 7.04,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 8.8595,
+    "min_ns": 8.109,
+    "max_ns": 9.638,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 7.970000000000001,
+    "min_ns": 7.497,
+    "max_ns": 10.62,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 7.421,
+    "min_ns": 7.121,
+    "max_ns": 8.074,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 9.4085,
+    "min_ns": 8.353,
+    "max_ns": 10.03,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 7.5184999999999995,
+    "min_ns": 7.205,
+    "max_ns": 13.98,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 17.205,
+    "min_ns": 13.12,
+    "max_ns": 21.97,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 14.83,
+    "min_ns": 11.3,
+    "max_ns": 23.09,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 10.765,
+    "min_ns": 10.24,
+    "max_ns": 12.92,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 12.11,
+    "min_ns": 11.15,
+    "max_ns": 16.74,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.445,
+    "min_ns": 9.963,
+    "max_ns": 11.41,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 11.870000000000001,
+    "min_ns": 6.605,
+    "max_ns": 21.91,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 9.604,
+    "min_ns": 8.121,
+    "max_ns": 21.5,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 10.925,
+    "min_ns": 9.452,
+    "max_ns": 12.32,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.876000000000001,
+    "min_ns": 8.708,
+    "max_ns": 13.59,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 2.822,
+    "min_ns": 2.613,
+    "max_ns": 2.935,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 3.59,
+    "min_ns": 3.356,
+    "max_ns": 4.25,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 8.931999999999999,
+    "min_ns": 8.466,
+    "max_ns": 8.982,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.2745,
+    "min_ns": 8.919,
+    "max_ns": 12.04,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 11.26,
+    "min_ns": 10.05,
+    "max_ns": 12.29,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 4.8105,
+    "min_ns": 4.251,
+    "max_ns": 7.186,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 9.2135,
+    "min_ns": 8.81,
+    "max_ns": 9.602,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.5595,
+    "min_ns": 9.144,
+    "max_ns": 11.12,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 8.8455,
+    "min_ns": 8.698,
+    "max_ns": 8.963,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 10.14,
+    "min_ns": 9.572,
+    "max_ns": 10.69,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 8.5195,
+    "min_ns": 8.467,
+    "max_ns": 10.14,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.83,
+    "min_ns": 10.06,
+    "max_ns": 11.22,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 12.004999999999999,
+    "min_ns": 9.95,
+    "max_ns": 15.24,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 13.54,
+    "min_ns": 12.19,
+    "max_ns": 15.43,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 9.282499999999999,
+    "min_ns": 8.523,
+    "max_ns": 10.68,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 8.6985,
+    "min_ns": 8.457,
+    "max_ns": 8.899,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 5.8315,
+    "min_ns": 5.745,
+    "max_ns": 5.982,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=16/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 5.045,
+    "min_ns": 4.779,
+    "max_ns": 5.645,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 12.725000000000001,
+    "min_ns": 11.25,
+    "max_ns": 13.33,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 11.004999999999999,
+    "min_ns": 10.12,
+    "max_ns": 12.43,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 3.0149999999999997,
+    "min_ns": 2.812,
+    "max_ns": 4.251,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 4.5175,
+    "min_ns": 3.854,
+    "max_ns": 9.312,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 11.625,
+    "min_ns": 10.78,
+    "max_ns": 12.98,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.19,
+    "min_ns": 10.07,
+    "max_ns": 10.74,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 10.385000000000002,
+    "min_ns": 10.37,
+    "max_ns": 10.6,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 4.782,
+    "min_ns": 3.437,
+    "max_ns": 10.39,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 12.03,
+    "min_ns": 10.64,
+    "max_ns": 13.86,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.563500000000001,
+    "min_ns": 8.824,
+    "max_ns": 10.52,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 8.992,
+    "min_ns": 8.702,
+    "max_ns": 9.356,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 9.7775,
+    "min_ns": 9.75,
+    "max_ns": 9.869,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 9.534500000000001,
+    "min_ns": 9.417,
+    "max_ns": 10.41,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 10.105,
+    "min_ns": 9.982,
+    "max_ns": 10.41,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 14.755,
+    "min_ns": 12.93,
+    "max_ns": 16.21,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 16.915,
+    "min_ns": 16.21,
+    "max_ns": 18.33,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=7/Direct": {
+    "samples": 8,
+    "median_ns": 13.08,
+    "min_ns": 11.98,
+    "max_ns": 13.81,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=7/DirectNoise": {
+    "samples": 8,
+    "median_ns": 11.165,
+    "min_ns": 10.33,
+    "max_ns": 14.38,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=7/Prefix": {
+    "samples": 8,
+    "median_ns": 6.859500000000001,
+    "min_ns": 6.791,
+    "max_ns": 7.061,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=7/Shape": {
+    "samples": 8,
+    "median_ns": 5.587,
+    "min_ns": 5.291,
+    "max_ns": 5.864,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 8.949,
+    "min_ns": 8.593,
+    "max_ns": 9.382,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 9.5405,
+    "min_ns": 8.591,
+    "max_ns": 13.02,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 3.539,
+    "min_ns": 3.49,
+    "max_ns": 3.686,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/PrefixMiss/rules=256/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 4.242,
+    "min_ns": 3.898,
+    "max_ns": 4.722,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 40.955,
+    "min_ns": 12.18,
+    "max_ns": 119.5,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 40.765,
+    "min_ns": 24.56,
+    "max_ns": 77.35,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 67.535,
+    "min_ns": 36.95,
+    "max_ns": 135.6,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/LengthMiss/rules=256/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 11.469999999999999,
+    "min_ns": 6.742,
+    "max_ns": 23.94,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 32.04,
+    "min_ns": 24.41,
+    "max_ns": 50.9,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 17.885,
+    "min_ns": 15.87,
+    "max_ns": 312.5,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 25.625,
+    "min_ns": 13.69,
+    "max_ns": 150.6,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Collision/rules=256/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 13.83,
+    "min_ns": 13.05,
+    "max_ns": 14.7,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 11.78,
+    "min_ns": 10.79,
+    "max_ns": 12.81,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 11.85,
+    "min_ns": 11.27,
+    "max_ns": 12.29,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 12.65,
+    "min_ns": 11.79,
+    "max_ns": 14.54,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Hit/rules=256/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 21.990000000000002,
+    "min_ns": 18.76,
+    "max_ns": 24.14,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=91/Direct": {
+    "samples": 8,
+    "median_ns": 13.76,
+    "min_ns": 13.53,
+    "max_ns": 15.45,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=91/DirectNoise": {
+    "samples": 8,
+    "median_ns": 12.145,
+    "min_ns": 11.56,
+    "max_ns": 13.58,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=91/Prefix": {
+    "samples": 8,
+    "median_ns": 8.018,
+    "min_ns": 7.379,
+    "max_ns": 8.301,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkLookup/Mixed10/rules=256/len=64/seed=91/Shape": {
+    "samples": 8,
+    "median_ns": 7.802,
+    "min_ns": 6.835,
+    "max_ns": 13.67,
+    "bytes": [
+      0
+    ],
+    "allocs": [
+      0
+    ]
+  },
+  "BenchmarkBuild/rules=8/Map": {
+    "samples": 8,
+    "median_ns": 199.95,
+    "min_ns": 197.3,
+    "max_ns": 217.0,
+    "bytes": [
+      256
+    ],
+    "allocs": [
+      2
+    ]
+  },
+  "BenchmarkBuild/rules=8/Filtered": {
+    "samples": 8,
+    "median_ns": 814.05,
+    "min_ns": 737.3,
+    "max_ns": 1984.0,
+    "bytes": [
+      9728
+    ],
+    "allocs": [
+      3
+    ]
+  },
+  "BenchmarkBuild/rules=256/Map": {
+    "samples": 8,
+    "median_ns": 4657.0,
+    "min_ns": 4170.0,
+    "max_ns": 5053.0,
+    "bytes": [
+      13656
+    ],
+    "allocs": [
+      4
+    ]
+  },
+  "BenchmarkBuild/rules=256/Filtered": {
+    "samples": 8,
+    "median_ns": 4444.0,
+    "min_ns": 4228.0,
+    "max_ns": 4675.0,
+    "bytes": [
+      23128
+    ],
+    "allocs": [
+      5
+    ]
+  }
+}

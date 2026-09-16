@@ -1,0 +1,26 @@
+// Predeclared hypotheses, before the first benchmark run (2026-09-16).
+// H1: ByteSet is exactly 32 B and matches map membership for all 256 values.
+//     Steady-state lookups allocate zero bytes for bitmap, bool array and map.
+// H2: String filters have no false negatives and all lookup variants allocate
+//     zero bytes. PrefixMiss reaches the exact map 0% of the time; LengthMiss
+//     reaches it 100% with Prefix but 0% with Shape. Collision and Hit reach it
+//     100% with both. TestVerify_CandidateRates checks these independently.
+// H3: On 256 rules, PrefixMiss and LengthMiss, eliminating exact lookups reduces
+//     ns/op beyond the same-row Direct/DirectNoise difference. If not, evidence
+//     for the timing benefit is inconclusive; the lookup count claim survives.
+// H4: When both filters admit everything (Hit, Collision), filtering cannot
+//     save any exact lookup; any speedup needs evidence beyond this mechanism.
+//     We expect at least one regression above the noise floor, but do not make
+//     correctness or acceptance conditional on finding a regression.
+// H5: Construction is not free: a StringSet embeds exactly 8208 bytes of feature
+//     bits, in addition to a map. Measure map-only and filtered construction
+//     separately; no build work is charged to steady-state lookup benchmarks.
+//
+// Protocol: one batch, -cpu=1 -count=8 -benchtime=100ms, all groups including
+// per-input DirectNoise. Report medians and benchstat uncertainty. No selective
+// reruns or exclusions. Insufficient timing resolution is reported as such.
+// Each lookup op consumes one key from a fixed shuffled corpus of 1000 keys.
+// Rules: 8/256, byte lengths: 16/64, two corpus seeds. Inputs are synthetic;
+// Hits clone the key bytes so pointer identity is not the intended shortcut.
+// Construction and input generation are outside the lookup timer (b.Loop).
+

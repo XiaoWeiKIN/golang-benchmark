@@ -1,0 +1,493 @@
+Compiler evidence, Go 1.25.4 darwin/arm64
+Commands:
+  go build -gcflags='-m=2' ./topics/18-bitmap-filter
+  go build -gcflags='-S' ./topics/18-bitmap-filter
+Diagnostics are excerpts. Assembly blocks include the selected query functions.
+Only the absolute checkout root is replaced with $REPO.
+
+topics/18-bitmap-filter/bitmap.go:8:6: can inline (*ByteSet).Add with cost 12 as: method(*ByteSet) func(byte) { s[value >> uint(6)] |= uint64(1) << (value & byte(63)) }
+topics/18-bitmap-filter/bitmap.go:11:6: cannot inline (*ByteSet).Contains: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:19:6: cannot inline (*ByteFlags).Contains: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:24:6: cannot inline ByteMap.Contains: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:30:6: cannot inline ByteMap.ContainsNoise: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:59:6: can inline prefixOf with cost 30 as: func(string) uint16 { if len(key) == 0 { return uint16(0) }; prefix := uint16(key[0]) << uint(8); if len(key) > 1 { prefix |= uint16(key[1]) }; return prefix }
+topics/18-bitmap-filter/bitmap.go:45:6: cannot inline NewStringSet: function too complex: cost 94 exceeds budget 80
+topics/18-bitmap-filter/bitmap.go:70:6: can inline (*StringSet).MayContainPrefix with cost 52 as: method(*StringSet) func(string) bool { prefix := prefixOf(key); return s.prefixes[prefix >> uint(6)] & (uint64(1) << (prefix & uint16(63))) != uint64(0) }
+topics/18-bitmap-filter/bitmap.go:75:6: cannot inline (*StringSet).MayContainShape: function too complex: cost 83 exceeds budget 80
+topics/18-bitmap-filter/bitmap.go:84:6: cannot inline (*StringSet).Direct: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:92:6: cannot inline (*StringSet).DirectNoise: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:98:6: cannot inline (*StringSet).Prefix: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:107:6: cannot inline (*StringSet).Shape: marked go:noinline
+topics/18-bitmap-filter/bitmap.go:8:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:11:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:19:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:24:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:30:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:46:7: &StringSet{...} escapes to heap in NewStringSet:
+topics/18-bitmap-filter/bitmap.go:46:29: make(map[string]struct {}, len(keys)) escapes to heap in NewStringSet:
+topics/18-bitmap-filter/bitmap.go:46:7: &StringSet{...} escapes to heap
+topics/18-bitmap-filter/bitmap.go:46:29: make(map[string]struct {}, len(keys)) escapes to heap
+topics/18-bitmap-filter/bitmap.go:59:15: key does not escape
+topics/18-bitmap-filter/bitmap.go:70:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:70:38: key does not escape
+topics/18-bitmap-filter/bitmap.go:75:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:75:37: key does not escape
+topics/18-bitmap-filter/bitmap.go:84:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:84:28: key does not escape
+topics/18-bitmap-filter/bitmap.go:92:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:92:33: key does not escape
+topics/18-bitmap-filter/bitmap.go:98:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:98:28: key does not escape
+topics/18-bitmap-filter/bitmap.go:107:7: s does not escape
+topics/18-bitmap-filter/bitmap.go:107:27: key does not escape
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteSet).Contains STEXT size=32 args=0x10 locals=0x0 funcid=0x0 align=0x0 leaf
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteSet).Contains(SB), LEAF|NOFRAME|ABIInternal, $0-16
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteSet).Contains.arginfo1(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteSet).Contains.argliveinfo(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	PCDATA	$3, $1
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:11)	PCDATA	$0, $-2
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	MOVB	(R0), R27
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	PCDATA	$0, $-1
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	UBFX	$6, R1, $2, R2
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	MOVD	(R0)(R2<<3), R2
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	MOVD	$1, R3
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	LSL	R1, R3, R1
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	TST	R1, R2
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	CSET	NE, R0
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:12)	RET	(R30)
+	0x0000 1b 00 80 39 22 1c 46 d3 02 78 62 f8 e3 03 40 b2  ...9".F..xb...@.
+	0x0010 61 20 c1 9a 5f 00 01 ea e0 07 9f 9a c0 03 5f d6  a .._........._.
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteFlags).Contains STEXT size=16 args=0x10 locals=0x0 funcid=0x0 align=0x0 leaf
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteFlags).Contains(SB), LEAF|NOFRAME|ABIInternal, $0-16
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteFlags).Contains.arginfo1(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*ByteFlags).Contains.argliveinfo(SB)
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	PCDATA	$3, $1
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	PCDATA	$0, $-2
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	MOVB	(R0), R27
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	PCDATA	$0, $-1
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	MOVBU	R1, R1
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	MOVBU	(R0)(R1), R0
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:19)	RET	(R30)
+	0x0000 1b 00 80 39 21 1c 40 d3 00 68 61 38 c0 03 5f d6  ...9!.@..ha8.._.
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.Contains STEXT size=96 args=0x10 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.Contains(SB), ABIInternal, $48-16
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	BLS	64
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.Contains.arginfo1(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.Contains.argliveinfo(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$3, $1
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVB	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.value+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:25)	MOVD	R0, R1
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:25)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.value+8(FP), R2
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:25)	MOVD	$type:github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap(SB), R0
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:25)	PCDATA	$1, $1
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:25)	CALL	runtime.mapaccess2(SB)
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:26)	MOVD	R1, R0
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:26)	MOVD	-8(RSP), R29
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:26)	MOVD.P	48(RSP), R30
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:26)	RET	(R30)
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:26)	NOP
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$1, $-1
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD	R0, 8(RSP)
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVB	R1, 16(RSP)
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD	R30, R3
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	CALL	runtime.morestack_noctxt(SB)
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	PCDATA	$0, $-1
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVD	8(RSP), R0
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	MOVBU	16(RSP), R1
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:24)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb c9 01 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 03 01 39 e1 03 00 aa  .....#.....9....
+	0x0020 e2 03 01 91 00 00 00 90 00 00 00 91 00 00 00 94  ................
+	0x0030 e0 03 01 aa fd 83 5f f8 fe 07 43 f8 c0 03 5f d6  ......_...C..._.
+	0x0040 e0 07 00 f9 e1 43 00 39 e3 03 1e aa 00 00 00 94  .....C.9........
+	0x0050 e0 07 40 f9 e1 43 40 39 ea ff ff 17 00 00 00 00  ..@..C@9........
+	rel 36+8 t=R_ADDRARM64 type:github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap+0
+	rel 44+4 t=R_CALLARM64 runtime.mapaccess2+0
+	rel 76+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.ContainsNoise STEXT size=96 args=0x10 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.ContainsNoise(SB), ABIInternal, $48-16
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	BLS	64
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.ContainsNoise.arginfo1(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap.ContainsNoise.argliveinfo(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$3, $1
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVB	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.value+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:31)	MOVD	R0, R1
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:31)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.value+8(FP), R2
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:31)	MOVD	$type:github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap(SB), R0
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:31)	PCDATA	$1, $1
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:31)	CALL	runtime.mapaccess2(SB)
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:32)	MOVD	R1, R0
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:32)	MOVD	-8(RSP), R29
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:32)	MOVD.P	48(RSP), R30
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:32)	RET	(R30)
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:32)	NOP
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$1, $-1
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD	R0, 8(RSP)
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVB	R1, 16(RSP)
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD	R30, R3
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	CALL	runtime.morestack_noctxt(SB)
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	PCDATA	$0, $-1
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVD	8(RSP), R0
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	MOVBU	16(RSP), R1
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:30)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb c9 01 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 03 01 39 e1 03 00 aa  .....#.....9....
+	0x0020 e2 03 01 91 00 00 00 90 00 00 00 91 00 00 00 94  ................
+	0x0030 e0 03 01 aa fd 83 5f f8 fe 07 43 f8 c0 03 5f d6  ......_...C..._.
+	0x0040 e0 07 00 f9 e1 43 00 39 e3 03 1e aa 00 00 00 94  .....C.9........
+	0x0050 e0 07 40 f9 e1 43 40 39 ea ff ff 17 00 00 00 00  ..@..C@9........
+	rel 36+8 t=R_ADDRARM64 type:github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.ByteMap+0
+	rel 44+4 t=R_CALLARM64 runtime.mapaccess2+0
+	rel 76+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape STEXT size=208 args=0x18 locals=0x18 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape(SB), ABIInternal, $32-24
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	BLS	176
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD.W	R30, -32(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	FUNCDATA	$0, gclocals·TswRR9Pia9Wsluv5u1sUnA==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$3, $1
+	0x001c 00028 (<unknown line number>)	NOP
+	0x001c 00028 (<unknown line number>)	NOP
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:60)	CBNZ	R2, 40
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:71)	MOVD	ZR, R4
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:71)	JMP	64
+	0x0028 00040 ($REPO/topics/18-bitmap-filter/bitmap.go:63)	MOVBU	(R1), R3
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:63)	UBFIZ	$8, R3, $8, R4
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:64)	CMP	$1, R2
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:64)	BLE	64
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	MOVBU	1(R1), R5
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	ORR	R3<<8, R5, R4
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVB	(R0), R27
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	PCDATA	$0, $-1
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	ADD	$8, R0, R3
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	UBFX	$6, R4, $10, R5
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVD	(R3)(R5<<3), R3
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVD	$1, R5
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	LSL	R4, R5, R4
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	TST	R3, R4
+	0x005c 00092 ($REPO/topics/18-bitmap-filter/bitmap.go:76)	BEQ	144
+	0x0060 00096 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	UBFX	$6, R2, $1, R3
+	0x0064 00100 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD	$8200, R4
+	0x0068 00104 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	ADD	R4, R0, R4
+	0x006c 00108 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	CMP	$2, R3
+	0x0070 00112 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	BHS	160
+	0x0074 00116 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD	(R4)(R3<<3), R1
+	0x0078 00120 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	LSL	R2, R5, R2
+	0x007c 00124 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	TST	R1, R2
+	0x0080 00128 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	CSET	NE, R0
+	0x0084 00132 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD	-8(RSP), R29
+	0x0088 00136 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD.P	32(RSP), R30
+	0x008c 00140 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	RET	(R30)
+	0x0090 00144 ($REPO/topics/18-bitmap-filter/bitmap.go:77)	MOVD	ZR, R0
+	0x0094 00148 ($REPO/topics/18-bitmap-filter/bitmap.go:77)	MOVD	-8(RSP), R29
+	0x0098 00152 ($REPO/topics/18-bitmap-filter/bitmap.go:77)	MOVD.P	32(RSP), R30
+	0x009c 00156 ($REPO/topics/18-bitmap-filter/bitmap.go:77)	RET	(R30)
+	0x00a0 00160 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD	R3, R0
+	0x00a4 00164 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	MOVD	$2, R1
+	0x00a8 00168 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	PCDATA	$1, $1
+	0x00a8 00168 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	CALL	runtime.panicIndexU(SB)
+	0x00ac 00172 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	HINT	$0
+	0x00b0 00176 ($REPO/topics/18-bitmap-filter/bitmap.go:80)	NOP
+	0x00b0 00176 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$1, $-1
+	0x00b0 00176 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$0, $-2
+	0x00b0 00176 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	STP	(R0, R1), 8(RSP)
+	0x00b4 00180 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	R2, 24(RSP)
+	0x00b8 00184 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	R30, R3
+	0x00bc 00188 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	CALL	runtime.morestack_noctxt(SB)
+	0x00c0 00192 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	PCDATA	$0, $-1
+	0x00c0 00192 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	LDP	8(RSP), (R0, R1)
+	0x00c4 00196 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	MOVD	24(RSP), R2
+	0x00c8 00200 ($REPO/topics/18-bitmap-filter/bitmap.go:75)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb 49 05 00 54 fe 0f 1e f8  ..@..c0.I..T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 1b 00 f9 62 00 00 b5  .....#......b...
+	0x0020 e4 03 1f aa 07 00 00 14 23 00 40 39 64 1c 78 d3  ........#.@9d.x.
+	0x0030 5f 04 00 f1 6d 00 00 54 25 04 40 39 a4 20 03 aa  _...m..T%.@9. ..
+	0x0040 1b 00 80 39 03 20 00 91 85 3c 46 d3 63 78 65 f8  ...9. ...<F.cxe.
+	0x0050 e5 03 40 b2 a4 20 c4 9a 9f 00 03 ea a0 01 00 54  ..@.. .........T
+	0x0060 43 18 46 d3 04 01 84 d2 04 00 04 8b 7f 08 00 f1  C.F.............
+	0x0070 82 01 00 54 81 78 63 f8 a2 20 c2 9a 5f 00 01 ea  ...T.xc.. .._...
+	0x0080 e0 07 9f 9a fd 83 5f f8 fe 07 42 f8 c0 03 5f d6  ......_...B..._.
+	0x0090 e0 03 1f aa fd 83 5f f8 fe 07 42 f8 c0 03 5f d6  ......_...B..._.
+	0x00a0 e0 03 03 aa e1 03 7f b2 00 00 00 94 1f 20 03 d5  ............. ..
+	0x00b0 e0 87 00 a9 e2 0f 00 f9 e3 03 1e aa 00 00 00 94  ................
+	0x00c0 e0 87 40 a9 e2 0f 40 f9 ce ff ff 17 00 00 00 00  ..@...@.........
+	rel 168+4 t=R_CALLARM64 runtime.panicIndexU+0
+	rel 188+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Direct STEXT size=112 args=0x18 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Direct(SB), ABIInternal, $48-24
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	BLS	72
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	FUNCDATA	$0, gclocals·TswRR9Pia9Wsluv5u1sUnA==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Direct.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Direct.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$3, $1
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	MOVD	(R0), R4
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	MOVD	$type:map[string]struct {}(SB), R0
+	0x0028 00040 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	MOVD	R2, R3
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	MOVD	R1, R2
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	MOVD	R4, R1
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	PCDATA	$1, $1
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:85)	CALL	runtime.mapaccess2_faststr(SB)
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:86)	MOVD	R1, R0
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:86)	MOVD	-8(RSP), R29
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:86)	MOVD.P	48(RSP), R30
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:86)	RET	(R30)
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:86)	NOP
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$1, $-1
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$0, $-2
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	STP	(R0, R1), 8(RSP)
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	R2, 24(RSP)
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	R30, R3
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	CALL	runtime.morestack_noctxt(SB)
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	PCDATA	$0, $-1
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	LDP	8(RSP), (R0, R1)
+	0x005c 00092 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	MOVD	24(RSP), R2
+	0x0060 00096 ($REPO/topics/18-bitmap-filter/bitmap.go:84)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb 09 02 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 23 00 f9 04 00 40 f9  .....#...#....@.
+	0x0020 00 00 00 90 00 00 00 91 e3 03 02 aa e2 03 01 aa  ................
+	0x0030 e1 03 04 aa 00 00 00 94 e0 03 01 aa fd 83 5f f8  .............._.
+	0x0040 fe 07 43 f8 c0 03 5f d6 e0 87 00 a9 e2 0f 00 f9  ..C..._.........
+	0x0050 e3 03 1e aa 00 00 00 94 e0 87 40 a9 e2 0f 40 f9  ..........@...@.
+	0x0060 e8 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 32+8 t=R_ADDRARM64 type:map[string]struct {}+0
+	rel 52+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 84+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).DirectNoise STEXT size=112 args=0x18 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).DirectNoise(SB), ABIInternal, $48-24
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	BLS	72
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	FUNCDATA	$0, gclocals·TswRR9Pia9Wsluv5u1sUnA==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).DirectNoise.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).DirectNoise.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$3, $1
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	MOVD	(R0), R4
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	MOVD	$type:map[string]struct {}(SB), R0
+	0x0028 00040 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	MOVD	R2, R3
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	MOVD	R1, R2
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	MOVD	R4, R1
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	PCDATA	$1, $1
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:93)	CALL	runtime.mapaccess2_faststr(SB)
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:94)	MOVD	R1, R0
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:94)	MOVD	-8(RSP), R29
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:94)	MOVD.P	48(RSP), R30
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:94)	RET	(R30)
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:94)	NOP
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$1, $-1
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$0, $-2
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	STP	(R0, R1), 8(RSP)
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	R2, 24(RSP)
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	R30, R3
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	CALL	runtime.morestack_noctxt(SB)
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	PCDATA	$0, $-1
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	LDP	8(RSP), (R0, R1)
+	0x005c 00092 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	MOVD	24(RSP), R2
+	0x0060 00096 ($REPO/topics/18-bitmap-filter/bitmap.go:92)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb 09 02 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 23 00 f9 04 00 40 f9  .....#...#....@.
+	0x0020 00 00 00 90 00 00 00 91 e3 03 02 aa e2 03 01 aa  ................
+	0x0030 e1 03 04 aa 00 00 00 94 e0 03 01 aa fd 83 5f f8  .............._.
+	0x0040 fe 07 43 f8 c0 03 5f d6 e0 87 00 a9 e2 0f 00 f9  ..C..._.........
+	0x0050 e3 03 1e aa 00 00 00 94 e0 87 40 a9 e2 0f 40 f9  ..........@...@.
+	0x0060 e8 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 32+8 t=R_ADDRARM64 type:map[string]struct {}+0
+	rel 52+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 84+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Prefix STEXT size=192 args=0x18 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Prefix(SB), ABIInternal, $48-24
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	BLS	156
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	FUNCDATA	$0, gclocals·TswRR9Pia9Wsluv5u1sUnA==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Prefix.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Prefix.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$3, $1
+	0x001c 00028 (<unknown line number>)	NOP
+	0x001c 00028 (<unknown line number>)	NOP
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:60)	CBNZ	R2, 40
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:71)	MOVD	ZR, R5
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:71)	JMP	64
+	0x0028 00040 ($REPO/topics/18-bitmap-filter/bitmap.go:63)	MOVBU	(R1), R4
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:63)	UBFIZ	$8, R4, $8, R5
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:64)	CMP	$1, R2
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:64)	BLE	64
+	0x0038 00056 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	MOVBU	1(R1), R6
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	ORR	R4<<8, R6, R5
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:65)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVB	(R0), R27
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	PCDATA	$0, $-1
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	ADD	$8, R0, R4
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	UBFX	$6, R5, $10, R6
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVD	(R4)(R6<<3), R4
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	MOVD	$1, R6
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	LSL	R5, R6, R5
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:72)	TST	R5, R4
+	0x005c 00092 ($REPO/topics/18-bitmap-filter/bitmap.go:99)	BEQ	140
+	0x0060 00096 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	MOVD	(R0), R4
+	0x0064 00100 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	MOVD	$type:map[string]struct {}(SB), R0
+	0x006c 00108 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	MOVD	R2, R3
+	0x0070 00112 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	MOVD	R1, R2
+	0x0074 00116 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	MOVD	R4, R1
+	0x0078 00120 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	PCDATA	$1, $1
+	0x0078 00120 ($REPO/topics/18-bitmap-filter/bitmap.go:102)	CALL	runtime.mapaccess2_faststr(SB)
+	0x007c 00124 ($REPO/topics/18-bitmap-filter/bitmap.go:103)	MOVD	R1, R0
+	0x0080 00128 ($REPO/topics/18-bitmap-filter/bitmap.go:103)	MOVD	-8(RSP), R29
+	0x0084 00132 ($REPO/topics/18-bitmap-filter/bitmap.go:103)	MOVD.P	48(RSP), R30
+	0x0088 00136 ($REPO/topics/18-bitmap-filter/bitmap.go:103)	RET	(R30)
+	0x008c 00140 ($REPO/topics/18-bitmap-filter/bitmap.go:100)	MOVD	ZR, R0
+	0x0090 00144 ($REPO/topics/18-bitmap-filter/bitmap.go:100)	MOVD	-8(RSP), R29
+	0x0094 00148 ($REPO/topics/18-bitmap-filter/bitmap.go:100)	MOVD.P	48(RSP), R30
+	0x0098 00152 ($REPO/topics/18-bitmap-filter/bitmap.go:100)	RET	(R30)
+	0x009c 00156 ($REPO/topics/18-bitmap-filter/bitmap.go:100)	NOP
+	0x009c 00156 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$1, $-1
+	0x009c 00156 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$0, $-2
+	0x009c 00156 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	STP	(R0, R1), 8(RSP)
+	0x00a0 00160 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	R2, 24(RSP)
+	0x00a4 00164 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	R30, R3
+	0x00a8 00168 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	CALL	runtime.morestack_noctxt(SB)
+	0x00ac 00172 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	PCDATA	$0, $-1
+	0x00ac 00172 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	LDP	8(RSP), (R0, R1)
+	0x00b0 00176 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	MOVD	24(RSP), R2
+	0x00b4 00180 ($REPO/topics/18-bitmap-filter/bitmap.go:98)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb a9 04 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 23 00 f9 62 00 00 b5  .....#...#..b...
+	0x0020 e5 03 1f aa 07 00 00 14 24 00 40 39 85 1c 78 d3  ........$.@9..x.
+	0x0030 5f 04 00 f1 6d 00 00 54 26 04 40 39 c5 20 04 aa  _...m..T&.@9. ..
+	0x0040 1b 00 80 39 04 20 00 91 a6 3c 46 d3 84 78 66 f8  ...9. ...<F..xf.
+	0x0050 e6 03 40 b2 c5 20 c5 9a 9f 00 05 ea 80 01 00 54  ..@.. .........T
+	0x0060 04 00 40 f9 00 00 00 90 00 00 00 91 e3 03 02 aa  ..@.............
+	0x0070 e2 03 01 aa e1 03 04 aa 00 00 00 94 e0 03 01 aa  ................
+	0x0080 fd 83 5f f8 fe 07 43 f8 c0 03 5f d6 e0 03 1f aa  .._...C..._.....
+	0x0090 fd 83 5f f8 fe 07 43 f8 c0 03 5f d6 e0 87 00 a9  .._...C..._.....
+	0x00a0 e2 0f 00 f9 e3 03 1e aa 00 00 00 94 e0 87 40 a9  ..............@.
+	0x00b0 e2 0f 40 f9 d3 ff ff 17 00 00 00 00 00 00 00 00  ..@.............
+	rel 100+8 t=R_ADDRARM64 type:map[string]struct {}+0
+	rel 120+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 168+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Shape STEXT size=144 args=0x18 locals=0x28 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Shape(SB), ABIInternal, $48-24
+	0x0000 00000 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	BLS	104
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD.W	R30, -48(RSP)
+	0x0010 00016 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	FUNCDATA	$0, gclocals·TswRR9Pia9Wsluv5u1sUnA==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Shape.arginfo1(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).Shape.argliveinfo(SB)
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$3, $1
+	0x0018 00024 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.s(FP)
+	0x001c 00028 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+16(FP)
+	0x0020 00032 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP)
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	PCDATA	$3, $-1
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	PCDATA	$1, $0
+	0x0024 00036 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape(SB)
+	0x0028 00040 ($REPO/topics/18-bitmap-filter/bitmap.go:108)	TBZ	$0, R0, 88
+	0x002c 00044 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.s(FP), R4
+	0x0030 00048 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	MOVD	(R4), R1
+	0x0034 00052 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	MOVD	$type:map[string]struct {}(SB), R0
+	0x003c 00060 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+8(FP), R2
+	0x0040 00064 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.key+16(FP), R3
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	PCDATA	$1, $1
+	0x0044 00068 ($REPO/topics/18-bitmap-filter/bitmap.go:111)	CALL	runtime.mapaccess2_faststr(SB)
+	0x0048 00072 ($REPO/topics/18-bitmap-filter/bitmap.go:112)	MOVD	R1, R0
+	0x004c 00076 ($REPO/topics/18-bitmap-filter/bitmap.go:112)	MOVD	-8(RSP), R29
+	0x0050 00080 ($REPO/topics/18-bitmap-filter/bitmap.go:112)	MOVD.P	48(RSP), R30
+	0x0054 00084 ($REPO/topics/18-bitmap-filter/bitmap.go:112)	RET	(R30)
+	0x0058 00088 ($REPO/topics/18-bitmap-filter/bitmap.go:109)	MOVD	ZR, R0
+	0x005c 00092 ($REPO/topics/18-bitmap-filter/bitmap.go:109)	MOVD	-8(RSP), R29
+	0x0060 00096 ($REPO/topics/18-bitmap-filter/bitmap.go:109)	MOVD.P	48(RSP), R30
+	0x0064 00100 ($REPO/topics/18-bitmap-filter/bitmap.go:109)	RET	(R30)
+	0x0068 00104 ($REPO/topics/18-bitmap-filter/bitmap.go:109)	NOP
+	0x0068 00104 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$1, $-1
+	0x0068 00104 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$0, $-2
+	0x0068 00104 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	STP	(R0, R1), 8(RSP)
+	0x006c 00108 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD	R2, 24(RSP)
+	0x0070 00112 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD	R30, R3
+	0x0074 00116 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	CALL	runtime.morestack_noctxt(SB)
+	0x0078 00120 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	PCDATA	$0, $-1
+	0x0078 00120 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	LDP	8(RSP), (R0, R1)
+	0x007c 00124 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	MOVD	24(RSP), R2
+	0x0080 00128 ($REPO/topics/18-bitmap-filter/bitmap.go:107)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb 09 03 00 54 fe 0f 1d f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e0 1f 00 f9 e2 27 00 f9  .....#.......'..
+	0x0020 e1 23 00 f9 00 00 00 94 80 01 00 36 e4 1f 40 f9  .#.........6..@.
+	0x0030 81 00 40 f9 00 00 00 90 00 00 00 91 e2 23 40 f9  ..@..........#@.
+	0x0040 e3 27 40 f9 00 00 00 94 e0 03 01 aa fd 83 5f f8  .'@..........._.
+	0x0050 fe 07 43 f8 c0 03 5f d6 e0 03 1f aa fd 83 5f f8  ..C..._......._.
+	0x0060 fe 07 43 f8 c0 03 5f d6 e0 87 00 a9 e2 0f 00 f9  ..C..._.........
+	0x0070 e3 03 1e aa 00 00 00 94 e0 87 40 a9 e2 0f 40 f9  ..........@...@.
+	0x0080 e0 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 36+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter.(*StringSet).MayContainShape+0
+	rel 52+8 t=R_ADDRARM64 type:map[string]struct {}+0
+	rel 68+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 116+4 t=R_CALLARM64 runtime.morestack_noctxt+0
