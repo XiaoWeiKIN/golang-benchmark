@@ -1,0 +1,1871 @@
+Compiler evidence (Go 1.25.4 darwin/arm64)
+Commands:
+  go build -gcflags='-m=2' ./topics/19-repeated-lookup
+  go build -gcflags='-S' ./topics/19-repeated-lookup
+Diagnostics are excerpts; full selected function assembly blocks follow.
+Only the checkout root is normalized to $REPO.
+
+topics/19-repeated-lookup/lookup.go:18:6: can inline slot with cost 37 as: func(string) int { switch statement }
+topics/19-repeated-lookup/lookup.go:41:6: can inline get with cost 18 as: func([]Attribute, string) (string, bool) { for loop; return "", false }
+topics/19-repeated-lookup/lookup.go:54:6: cannot inline SliceRepeated: marked go:noinline
+topics/19-repeated-lookup/lookup.go:63:6: cannot inline SliceRepeatedNoise: marked go:noinline
+topics/19-repeated-lookup/lookup.go:76:6: cannot inline SliceScan: marked go:noinline
+topics/19-repeated-lookup/lookup.go:100:6: cannot inline BuildIndex: marked go:noinline
+topics/19-repeated-lookup/lookup.go:109:6: cannot inline MapRepeated: marked go:noinline
+topics/19-repeated-lookup/lookup.go:118:6: cannot inline MapRepeatedNoise: marked go:noinline
+topics/19-repeated-lookup/lookup.go:130:6: cannot inline MapScan: marked go:noinline
+topics/19-repeated-lookup/lookup.go:153:6: cannot inline IndexEach: marked go:noinline
+topics/19-repeated-lookup/lookup.go:161:6: cannot inline consume: marked go:noinline
+topics/19-repeated-lookup/lookup.go:176:6: cannot inline BatchRepeated: marked go:noinline
+topics/19-repeated-lookup/lookup.go:185:6: cannot inline BatchRepeatedNoise: marked go:noinline
+topics/19-repeated-lookup/lookup.go:194:6: cannot inline BatchIndexed: marked go:noinline
+topics/19-repeated-lookup/lookup.go:204:6: cannot inline BatchExtracted: marked go:noinline
+topics/19-repeated-lookup/lookup.go:18:11: key does not escape
+topics/19-repeated-lookup/lookup.go:41:29: key does not escape
+topics/19-repeated-lookup/lookup.go:101:15: make(map[string]string, len(attrs)) escapes to heap in BuildIndex:
+topics/19-repeated-lookup/lookup.go:101:15: make(map[string]string, len(attrs)) escapes to heap
+topics/19-repeated-lookup/lookup.go:109:18: attrs does not escape
+topics/19-repeated-lookup/lookup.go:118:23: attrs does not escape
+topics/19-repeated-lookup/lookup.go:161:14: result does not escape
+topics/19-repeated-lookup/lookup.go:176:20: attrs does not escape
+topics/19-repeated-lookup/lookup.go:185:25: attrs does not escape
+topics/19-repeated-lookup/lookup.go:204:21: attrs does not escape
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated STEXT size=512 args=0xa8 locals=0xe8 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:54)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated(SB), ABIInternal, $240-168
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:54)	SUB	$112, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:54)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:54)	BLS	472
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD.W	R30, -240(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	R29, -8(RSP)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:54)	SUB	$8, RSP, R29
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	FUNCDATA	$0, gclocals·57jgxN6XypxNeXGdxxsh9Q==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	FUNCDATA	$1, gclocals·EVR4jrmdmG4piQ2ML6pmQA==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-2
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:54)	ADR	52, runtime.duffzero+224(R27)(R27)(REG)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:54)	STP	(R29, R27), -24(RSP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:54)	SUB	$24, RSP, R29
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:54)	DUFFZERO	runtime.duffzero(SB)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:54)	SUB	$8, RSP, R29
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-1
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:55)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:55)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:55)	ADR	80, runtime.duffzero+224(R27)(R27)(REG)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:55)	STP	(R29, R27), -24(RSP)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:55)	SUB	$24, RSP, R29
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:55)	DUFFZERO	runtime.duffzero(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:55)	SUB	$8, RSP, R29
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:55)	PCDATA	$0, $-1
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:55)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP)
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:56)	CMP	$8, R3
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:56)	BHI	456
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP)
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:56)	PCDATA	$3, $2
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys(SB), R4
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	ZR, R2
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:56)	JMP	172
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CSET	GT, R5
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R6
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:57)	ADD	R2<<4, R6, R9
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:57)	LSL	$4, R2, R10
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	R1, (R6)(R10)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	R0, 8(R9)
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R6
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVB	R5, (R6)(R2)
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:56)	ADD	$16, R4, R4
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:56)	ADD	$1, R2, R2
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R7, R0
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R8, R1
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:56)	CMP	R2, R3
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:56)	BLE	256
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP)
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP)
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:56)	LDP	(R4), (R5, R6)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.len-200(SP)
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.ptr-32(SP)
+	0x00c8 00200 (<unknown line number>)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R0, R7
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R1, R8
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:42)	JMP	348
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP), R2
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP), R3
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP), R4
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R7
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP), R8
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_37-176(SP), R0
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_38-16(SP), R1
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:57)	JMP	124
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	ZR, R0
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	ZR, R1
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:57)	JMP	124
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:59)	PCDATA	$0, $-2
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:59)	ADR	280, runtime.duffcopy+448(R27)(R27)(REG)
+	0x010c 00268 ($REPO/topics/19-repeated-lookup/lookup.go:59)	STP	(R29, R27), -24(RSP)
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:59)	SUB	$24, RSP, R29
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:59)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:59)	SUB	$8, RSP, R29
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:59)	PCDATA	$0, $-1
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R0
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:59)	PCDATA	$0, $-2
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:59)	ADR	316, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:59)	STP	(R29, R27), -24(RSP)
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:59)	SUB	$24, RSP, R29
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:59)	DUFFCOPY	runtime.duffcopy(SB)
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:59)	SUB	$8, RSP, R29
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:59)	PCDATA	$0, $-1
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R0
+	0x0144 00324 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0148 00328 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD	-8(RSP), R29
+	0x014c 00332 ($REPO/topics/19-repeated-lookup/lookup.go:59)	MOVD.P	240(RSP), R30
+	0x0150 00336 ($REPO/topics/19-repeated-lookup/lookup.go:59)	RET	(R30)
+	0x0154 00340 ($REPO/topics/19-repeated-lookup/lookup.go:42)	ADD	$32, R0, R0
+	0x0158 00344 ($REPO/topics/19-repeated-lookup/lookup.go:42)	SUB	$1, R1, R1
+	0x015c 00348 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CMP	$0, R1
+	0x0160 00352 ($REPO/topics/19-repeated-lookup/lookup.go:42)	BLE	244
+	0x0164 00356 ($REPO/topics/19-repeated-lookup/lookup.go:42)	LDP	(R0), (R9, R10)
+	0x0168 00360 ($REPO/topics/19-repeated-lookup/lookup.go:42)	LDP	16(R0), (R11, R12)
+	0x016c 00364 ($REPO/topics/19-repeated-lookup/lookup.go:43)	CMP	R6, R10
+	0x0170 00368 ($REPO/topics/19-repeated-lookup/lookup.go:43)	BNE	340
+	0x0174 00372 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R12, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_37-176(SP)
+	0x0178 00376 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R11, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_38-16(SP)
+	0x017c 00380 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_39-184(SP)
+	0x0180 00384 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_40-24(SP)
+	0x0184 00388 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R9, R0
+	0x0188 00392 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R5, R1
+	0x018c 00396 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R10, R2
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:43)	PCDATA	$1, $1
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:43)	CALL	runtime.memequal(SB)
+	0x0194 00404 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_39-184(SP), R3
+	0x0198 00408 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CMP	$0, R3
+	0x019c 00412 ($REPO/topics/19-repeated-lookup/lookup.go:43)	TBNZ	$0, R0, 212
+	0x01a0 00416 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_40-24(SP), R0
+	0x01a4 00420 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R3, R1
+	0x01a8 00424 ($REPO/topics/19-repeated-lookup/lookup.go:57)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP), R2
+	0x01ac 00428 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP), R3
+	0x01b0 00432 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP), R4
+	0x01b4 00436 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.ptr-32(SP), R5
+	0x01b8 00440 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.len-200(SP), R6
+	0x01bc 00444 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R7
+	0x01c0 00448 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP), R8
+	0x01c4 00452 ($REPO/topics/19-repeated-lookup/lookup.go:43)	JMP	340
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:43)	PCDATA	$3, $1
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	R3, R1
+	0x01cc 00460 ($REPO/topics/19-repeated-lookup/lookup.go:56)	MOVD	$8, R2
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:56)	PCDATA	$1, $2
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:56)	CALL	runtime.panicSliceAlen(SB)
+	0x01d4 00468 ($REPO/topics/19-repeated-lookup/lookup.go:56)	HINT	$0
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:56)	NOP
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$1, $-1
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-2
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:54)	STP	(R0, R1), 144(RSP)
+	0x01dc 00476 ($REPO/topics/19-repeated-lookup/lookup.go:54)	STP	(R2, R3), 160(RSP)
+	0x01e0 00480 ($REPO/topics/19-repeated-lookup/lookup.go:54)	MOVD	R30, R3
+	0x01e4 00484 ($REPO/topics/19-repeated-lookup/lookup.go:54)	CALL	runtime.morestack_noctxt(SB)
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:54)	PCDATA	$0, $-1
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:54)	LDP	144(RSP), (R0, R1)
+	0x01ec 00492 ($REPO/topics/19-repeated-lookup/lookup.go:54)	LDP	160(RSP), (R2, R3)
+	0x01f0 00496 ($REPO/topics/19-repeated-lookup/lookup.go:54)	JMP	0
+	0x0000 90 0b 40 f9 f1 c3 01 d1 3f 02 10 eb 69 0e 00 54  ..@.....?...i..T
+	0x0010 fe 0f 11 f8 fd 83 1f f8 fd 23 00 d1 e0 c3 00 f9  .........#......
+	0x0020 f4 e3 03 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x0030 00 00 00 94 fd 23 00 d1 ff bf 00 f9 f4 03 01 91  .....#..........
+	0x0040 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0050 fd 23 00 d1 ff 63 00 f9 7f 20 00 f1 68 0b 00 54  .#...c... ..h..T
+	0x0060 e3 cf 00 f9 e1 c7 00 f9 e0 c3 00 f9 04 00 00 90  ................
+	0x0070 84 00 00 91 e2 03 1f aa 0d 00 00 14 e5 d7 9f 9a  ................
+	0x0080 e6 03 01 91 c9 10 02 8b 4a ec 7c d3 c1 68 2a f8  ........J.|..h*.
+	0x0090 20 05 00 f9 e6 03 03 91 c5 68 22 38 84 40 00 91   ........h"8.@..
+	0x00a0 42 04 00 91 e0 03 07 aa e1 03 08 aa 7f 00 02 eb  B...............
+	0x00b0 8d 02 00 54 e2 17 00 f9 e4 73 00 f9 85 18 40 a9  ...T.....s....@.
+	0x00c0 e6 13 00 f9 e5 67 00 f9 e7 03 00 aa e8 03 01 aa  .....g..........
+	0x00d0 23 00 00 14 e2 17 40 f9 e3 cf 40 f9 e4 73 40 f9  #.....@...@..s@.
+	0x00e0 e7 c3 40 f9 e8 c7 40 f9 e0 1f 40 f9 e1 6f 40 f9  ..@...@...@..o@.
+	0x00f0 e3 ff ff 17 e0 03 1f aa e1 03 1f aa e0 ff ff 17  ................
+	0x0100 f5 e3 03 91 f4 03 01 91 9b 00 00 10 fd ef 3e a9  ..............>.
+	0x0110 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 63 40 f9  .c.......#...c@.
+	0x0120 e0 bf 00 f9 f5 e3 03 91 f4 03 01 91 9b 00 00 10  ................
+	0x0130 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0140 e0 63 40 f9 e0 bf 00 f9 fd 83 5f f8 fe 07 4f f8  .c@......._...O.
+	0x0150 c0 03 5f d6 00 80 00 91 21 04 00 d1 3f 00 00 f1  .._.....!...?...
+	0x0160 ad fc ff 54 09 28 40 a9 0b 30 41 a9 5f 01 06 eb  ...T.(@..0A._...
+	0x0170 21 ff ff 54 ec 1f 00 f9 eb 6f 00 f9 e1 1b 00 f9  !..T.....o......
+	0x0180 e0 6b 00 f9 e0 03 09 aa e1 03 05 aa e2 03 0a aa  .k..............
+	0x0190 00 00 00 94 e3 1b 40 f9 7f 00 00 f1 c0 f9 07 37  ......@........7
+	0x01a0 e0 6b 40 f9 e1 03 03 aa e2 17 40 f9 e3 cf 40 f9  .k@.......@...@.
+	0x01b0 e4 73 40 f9 e5 67 40 f9 e6 13 40 f9 e7 c3 40 f9  .s@..g@...@...@.
+	0x01c0 e8 c7 40 f9 e4 ff ff 17 e1 03 03 aa e2 03 7d b2  ..@...........}.
+	0x01d0 00 00 00 94 1f 20 03 d5 e0 07 09 a9 e2 0f 0a a9  ..... ..........
+	0x01e0 e3 03 1e aa 00 00 00 94 e0 07 49 a9 e2 0f 4a a9  ..........I...J.
+	0x01f0 84 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 48+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 76+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 108+8 t=R_ADDRARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys+0
+	rel 276+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 312+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 400+4 t=R_CALLARM64 runtime.memequal+0
+	rel 464+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 484+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeatedNoise STEXT size=512 args=0xa8 locals=0xe8 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:63)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeatedNoise(SB), ABIInternal, $240-168
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:63)	SUB	$112, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:63)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:63)	BLS	472
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD.W	R30, -240(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	R29, -8(RSP)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:63)	SUB	$8, RSP, R29
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	FUNCDATA	$0, gclocals·57jgxN6XypxNeXGdxxsh9Q==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	FUNCDATA	$1, gclocals·EVR4jrmdmG4piQ2ML6pmQA==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeatedNoise.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeatedNoise.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-2
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:63)	ADR	52, runtime.duffzero+224(R27)(R27)(REG)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:63)	STP	(R29, R27), -24(RSP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:63)	SUB	$24, RSP, R29
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:63)	DUFFZERO	runtime.duffzero(SB)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:63)	SUB	$8, RSP, R29
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-1
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:64)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:64)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:64)	ADR	80, runtime.duffzero+224(R27)(R27)(REG)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:64)	STP	(R29, R27), -24(RSP)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:64)	SUB	$24, RSP, R29
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:64)	DUFFZERO	runtime.duffzero(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:64)	SUB	$8, RSP, R29
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:64)	PCDATA	$0, $-1
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:64)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP)
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:65)	CMP	$8, R3
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:65)	BHI	456
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP)
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:65)	PCDATA	$3, $2
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys(SB), R4
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	ZR, R2
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:65)	JMP	172
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CSET	GT, R5
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R6
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:66)	ADD	R2<<4, R6, R9
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:66)	LSL	$4, R2, R10
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	R1, (R6)(R10)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	R0, 8(R9)
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R6
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVB	R5, (R6)(R2)
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:65)	ADD	$16, R4, R4
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:65)	ADD	$1, R2, R2
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R7, R0
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R8, R1
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:65)	CMP	R2, R3
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:65)	BLE	256
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP)
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP)
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:65)	LDP	(R4), (R5, R6)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.len-200(SP)
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.ptr-32(SP)
+	0x00c8 00200 (<unknown line number>)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R0, R7
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R1, R8
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:42)	JMP	348
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP), R2
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP), R3
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP), R4
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R7
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP), R8
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_37-176(SP), R0
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_38-16(SP), R1
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:66)	JMP	124
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	ZR, R0
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	ZR, R1
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:66)	JMP	124
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:68)	PCDATA	$0, $-2
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:68)	ADR	280, runtime.duffcopy+448(R27)(R27)(REG)
+	0x010c 00268 ($REPO/topics/19-repeated-lookup/lookup.go:68)	STP	(R29, R27), -24(RSP)
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:68)	SUB	$24, RSP, R29
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:68)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:68)	SUB	$8, RSP, R29
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:68)	PCDATA	$0, $-1
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R0
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-168(SP), R20
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:68)	PCDATA	$0, $-2
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:68)	ADR	316, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:68)	STP	(R29, R27), -24(RSP)
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:68)	SUB	$24, RSP, R29
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:68)	DUFFCOPY	runtime.duffcopy(SB)
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:68)	SUB	$8, RSP, R29
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:68)	PCDATA	$0, $-1
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-40(SP), R0
+	0x0144 00324 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0148 00328 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD	-8(RSP), R29
+	0x014c 00332 ($REPO/topics/19-repeated-lookup/lookup.go:68)	MOVD.P	240(RSP), R30
+	0x0150 00336 ($REPO/topics/19-repeated-lookup/lookup.go:68)	RET	(R30)
+	0x0154 00340 ($REPO/topics/19-repeated-lookup/lookup.go:42)	ADD	$32, R0, R0
+	0x0158 00344 ($REPO/topics/19-repeated-lookup/lookup.go:42)	SUB	$1, R1, R1
+	0x015c 00348 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CMP	$0, R1
+	0x0160 00352 ($REPO/topics/19-repeated-lookup/lookup.go:42)	BLE	244
+	0x0164 00356 ($REPO/topics/19-repeated-lookup/lookup.go:42)	LDP	(R0), (R9, R10)
+	0x0168 00360 ($REPO/topics/19-repeated-lookup/lookup.go:42)	LDP	16(R0), (R11, R12)
+	0x016c 00364 ($REPO/topics/19-repeated-lookup/lookup.go:43)	CMP	R6, R10
+	0x0170 00368 ($REPO/topics/19-repeated-lookup/lookup.go:43)	BNE	340
+	0x0174 00372 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R12, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_37-176(SP)
+	0x0178 00376 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R11, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_38-16(SP)
+	0x017c 00380 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_39-184(SP)
+	0x0180 00384 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_40-24(SP)
+	0x0184 00388 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R9, R0
+	0x0188 00392 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R5, R1
+	0x018c 00396 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	R10, R2
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:43)	PCDATA	$1, $1
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:43)	CALL	runtime.memequal(SB)
+	0x0194 00404 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_39-184(SP), R3
+	0x0198 00408 ($REPO/topics/19-repeated-lookup/lookup.go:42)	CMP	$0, R3
+	0x019c 00412 ($REPO/topics/19-repeated-lookup/lookup.go:43)	TBNZ	$0, R0, 212
+	0x01a0 00416 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_40-24(SP), R0
+	0x01a4 00420 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	R3, R1
+	0x01a8 00424 ($REPO/topics/19-repeated-lookup/lookup.go:66)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-192(SP), R2
+	0x01ac 00428 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP), R3
+	0x01b0 00432 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_36-8(SP), R4
+	0x01b4 00436 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.ptr-32(SP), R5
+	0x01b8 00440 ($REPO/topics/19-repeated-lookup/lookup.go:43)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.key.len-200(SP), R6
+	0x01bc 00444 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R7
+	0x01c0 00448 ($REPO/topics/19-repeated-lookup/lookup.go:42)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+144(FP), R8
+	0x01c4 00452 ($REPO/topics/19-repeated-lookup/lookup.go:43)	JMP	340
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:43)	PCDATA	$3, $1
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	R3, R1
+	0x01cc 00460 ($REPO/topics/19-repeated-lookup/lookup.go:65)	MOVD	$8, R2
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:65)	PCDATA	$1, $2
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:65)	CALL	runtime.panicSliceAlen(SB)
+	0x01d4 00468 ($REPO/topics/19-repeated-lookup/lookup.go:65)	HINT	$0
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:65)	NOP
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$1, $-1
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-2
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:63)	STP	(R0, R1), 144(RSP)
+	0x01dc 00476 ($REPO/topics/19-repeated-lookup/lookup.go:63)	STP	(R2, R3), 160(RSP)
+	0x01e0 00480 ($REPO/topics/19-repeated-lookup/lookup.go:63)	MOVD	R30, R3
+	0x01e4 00484 ($REPO/topics/19-repeated-lookup/lookup.go:63)	CALL	runtime.morestack_noctxt(SB)
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:63)	PCDATA	$0, $-1
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:63)	LDP	144(RSP), (R0, R1)
+	0x01ec 00492 ($REPO/topics/19-repeated-lookup/lookup.go:63)	LDP	160(RSP), (R2, R3)
+	0x01f0 00496 ($REPO/topics/19-repeated-lookup/lookup.go:63)	JMP	0
+	0x0000 90 0b 40 f9 f1 c3 01 d1 3f 02 10 eb 69 0e 00 54  ..@.....?...i..T
+	0x0010 fe 0f 11 f8 fd 83 1f f8 fd 23 00 d1 e0 c3 00 f9  .........#......
+	0x0020 f4 e3 03 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x0030 00 00 00 94 fd 23 00 d1 ff bf 00 f9 f4 03 01 91  .....#..........
+	0x0040 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0050 fd 23 00 d1 ff 63 00 f9 7f 20 00 f1 68 0b 00 54  .#...c... ..h..T
+	0x0060 e3 cf 00 f9 e1 c7 00 f9 e0 c3 00 f9 04 00 00 90  ................
+	0x0070 84 00 00 91 e2 03 1f aa 0d 00 00 14 e5 d7 9f 9a  ................
+	0x0080 e6 03 01 91 c9 10 02 8b 4a ec 7c d3 c1 68 2a f8  ........J.|..h*.
+	0x0090 20 05 00 f9 e6 03 03 91 c5 68 22 38 84 40 00 91   ........h"8.@..
+	0x00a0 42 04 00 91 e0 03 07 aa e1 03 08 aa 7f 00 02 eb  B...............
+	0x00b0 8d 02 00 54 e2 17 00 f9 e4 73 00 f9 85 18 40 a9  ...T.....s....@.
+	0x00c0 e6 13 00 f9 e5 67 00 f9 e7 03 00 aa e8 03 01 aa  .....g..........
+	0x00d0 23 00 00 14 e2 17 40 f9 e3 cf 40 f9 e4 73 40 f9  #.....@...@..s@.
+	0x00e0 e7 c3 40 f9 e8 c7 40 f9 e0 1f 40 f9 e1 6f 40 f9  ..@...@...@..o@.
+	0x00f0 e3 ff ff 17 e0 03 1f aa e1 03 1f aa e0 ff ff 17  ................
+	0x0100 f5 e3 03 91 f4 03 01 91 9b 00 00 10 fd ef 3e a9  ..............>.
+	0x0110 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 63 40 f9  .c.......#...c@.
+	0x0120 e0 bf 00 f9 f5 e3 03 91 f4 03 01 91 9b 00 00 10  ................
+	0x0130 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0140 e0 63 40 f9 e0 bf 00 f9 fd 83 5f f8 fe 07 4f f8  .c@......._...O.
+	0x0150 c0 03 5f d6 00 80 00 91 21 04 00 d1 3f 00 00 f1  .._.....!...?...
+	0x0160 ad fc ff 54 09 28 40 a9 0b 30 41 a9 5f 01 06 eb  ...T.(@..0A._...
+	0x0170 21 ff ff 54 ec 1f 00 f9 eb 6f 00 f9 e1 1b 00 f9  !..T.....o......
+	0x0180 e0 6b 00 f9 e0 03 09 aa e1 03 05 aa e2 03 0a aa  .k..............
+	0x0190 00 00 00 94 e3 1b 40 f9 7f 00 00 f1 c0 f9 07 37  ......@........7
+	0x01a0 e0 6b 40 f9 e1 03 03 aa e2 17 40 f9 e3 cf 40 f9  .k@.......@...@.
+	0x01b0 e4 73 40 f9 e5 67 40 f9 e6 13 40 f9 e7 c3 40 f9  .s@..g@...@...@.
+	0x01c0 e8 c7 40 f9 e4 ff ff 17 e1 03 03 aa e2 03 7d b2  ..@...........}.
+	0x01d0 00 00 00 94 1f 20 03 d5 e0 07 09 a9 e2 0f 0a a9  ..... ..........
+	0x01e0 e3 03 1e aa 00 00 00 94 e0 07 49 a9 e2 0f 4a a9  ..........I...J.
+	0x01f0 84 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 48+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 76+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 108+8 t=R_ADDRARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys+0
+	rel 276+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 312+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 400+4 t=R_CALLARM64 runtime.memequal+0
+	rel 464+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 484+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan STEXT size=752 args=0xa8 locals=0xa8 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:76)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan(SB), ABIInternal, $176-168
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:76)	SUB	$48, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:76)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:76)	BLS	724
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD.W	R30, -176(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	R29, -8(RSP)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:76)	SUB	$8, RSP, R29
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	FUNCDATA	$0, gclocals·zyaHvurr/TDUH2lqsABqyQ==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	FUNCDATA	$1, gclocals·Hlf1owPZj0leoqvyGYZICw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-2
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:76)	ADR	52, runtime.duffzero+224(R27)(R27)(REG)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:76)	STP	(R29, R27), -24(RSP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:76)	SUB	$24, RSP, R29
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:76)	DUFFZERO	runtime.duffzero(SB)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:76)	SUB	$8, RSP, R29
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-1
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:77)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-136(SP), R20
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:77)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:77)	ADR	80, runtime.duffzero+224(R27)(R27)(REG)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:77)	STP	(R29, R27), -24(RSP)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:77)	SUB	$24, RSP, R29
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:77)	DUFFZERO	runtime.duffzero(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:77)	SUB	$8, RSP, R29
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:77)	PCDATA	$0, $-1
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:77)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-8(SP)
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:78)	CMP	$8, R3
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:78)	BHI	708
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:79)	CBZ	R3, 108
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:78)	MOVD	R3, R2
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:82)	JMP	156
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:80)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:80)	PCDATA	$0, $-2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:80)	ADR	128, runtime.duffzero+224(R27)(R27)(REG)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:80)	STP	(R29, R27), -24(RSP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:80)	SUB	$24, RSP, R29
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:80)	DUFFZERO	runtime.duffzero(SB)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:80)	SUB	$8, RSP, R29
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:80)	PCDATA	$0, $-1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:80)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:80)	MOVD	-8(RSP), R29
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:80)	MOVD.P	176(RSP), R30
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:80)	RET	(R30)
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:82)	ADD	$32, R0, R0
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:82)	SUB	$1, R1, R1
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:82)	CMP	$0, R1
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:82)	BLE	624
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:82)	LDP	(R0), (R4, R5)
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:82)	LDP	16(R0), (R6, R7)
+	0x00ac 00172 (<unknown line number>)	NOP
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMP	$5, R5
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BGT	300
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:34)	CMP	$4, R5
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:34)	BNE	216
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVWU	(R4), R4
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVD	$1919251317, R5
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:34)	CMPW	R5, R4
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:34)	BNE	552
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVD	$7, R4
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMP	$5, R5
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	552
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVWU	(R4), R5
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVD	$1953853298, R8
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:22)	CMPW	R8, R5
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	264
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVBU	4(R4), R8
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:22)	CMPW	$101, R8
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	264
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVD	$1, R4
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVD	$1667330676, R8
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:32)	CMPW	R8, R5
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:32)	BNE	552
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVBU	4(R4), R4
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:32)	CMPW	$101, R4
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:32)	BNE	552
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVD	$6, R4
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMP	$6, R5
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	488
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:19)	MOVB	(R4), R5
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMPW	$114, R5
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BGT	404
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVWU	(R4), R5
+	0x0144 00324 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVD	$1752458605, R8
+	0x014c 00332 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMPW	R8, R5
+	0x0150 00336 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	364
+	0x0154 00340 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVHU	4(R4), R8
+	0x0158 00344 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVD	$25711, R9
+	0x015c 00348 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMPW	R9, R8
+	0x0160 00352 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	364
+	0x0164 00356 ($REPO/topics/19-repeated-lookup/lookup.go:83)	MOVD	ZR, R4
+	0x0168 00360 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x016c 00364 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$1768383858, R8
+	0x0174 00372 ($REPO/topics/19-repeated-lookup/lookup.go:28)	CMPW	R8, R5
+	0x0178 00376 ($REPO/topics/19-repeated-lookup/lookup.go:28)	BNE	552
+	0x017c 00380 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVHU	4(R4), R4
+	0x0180 00384 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$28271, R5
+	0x0184 00388 ($REPO/topics/19-repeated-lookup/lookup.go:28)	CMPW	R5, R4
+	0x0188 00392 ($REPO/topics/19-repeated-lookup/lookup.go:28)	BNE	552
+	0x018c 00396 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$4, R4
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x0194 00404 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVWU	(R4), R5
+	0x0198 00408 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$1952543859, R8
+	0x01a0 00416 ($REPO/topics/19-repeated-lookup/lookup.go:24)	CMPW	R8, R5
+	0x01a4 00420 ($REPO/topics/19-repeated-lookup/lookup.go:24)	BNE	448
+	0x01a8 00424 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVHU	4(R4), R8
+	0x01ac 00428 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$29557, R9
+	0x01b0 00432 ($REPO/topics/19-repeated-lookup/lookup.go:24)	CMPW	R9, R8
+	0x01b4 00436 ($REPO/topics/19-repeated-lookup/lookup.go:24)	BNE	448
+	0x01b8 00440 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$2, R4
+	0x01bc 00444 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x01c0 00448 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$1634624884, R8
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:30)	CMPW	R8, R5
+	0x01cc 00460 ($REPO/topics/19-repeated-lookup/lookup.go:30)	BNE	552
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVHU	4(R4), R4
+	0x01d4 00468 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$29806, R5
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:30)	CMPW	R5, R4
+	0x01dc 00476 ($REPO/topics/19-repeated-lookup/lookup.go:30)	BNE	552
+	0x01e0 00480 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$5, R4
+	0x01e4 00484 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMP	$7, R5
+	0x01ec 00492 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	552
+	0x01f0 00496 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVWU	(R4), R5
+	0x01f4 00500 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$1987208563, R8
+	0x01fc 00508 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	R8, R5
+	0x0200 00512 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	552
+	0x0204 00516 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVHU	4(R4), R5
+	0x0208 00520 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$25449, R8
+	0x020c 00524 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	R8, R5
+	0x0210 00528 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	552
+	0x0214 00532 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVBU	6(R4), R4
+	0x0218 00536 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	$101, R4
+	0x021c 00540 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	552
+	0x0220 00544 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$3, R4
+	0x0224 00548 ($REPO/topics/19-repeated-lookup/lookup.go:83)	JMP	556
+	0x0228 00552 ($REPO/topics/19-repeated-lookup/lookup.go:83)	MOVD	$-1, R4
+	0x022c 00556 ($REPO/topics/19-repeated-lookup/lookup.go:84)	TBNZ	$63, R4, 148
+	0x0230 00560 ($REPO/topics/19-repeated-lookup/lookup.go:84)	CMP	R4, R2
+	0x0234 00564 ($REPO/topics/19-repeated-lookup/lookup.go:84)	BLE	148
+	0x0238 00568 ($REPO/topics/19-repeated-lookup/lookup.go:84)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-8(SP), R5
+	0x023c 00572 ($REPO/topics/19-repeated-lookup/lookup.go:84)	MOVBU	(R5)(R4), R8
+	0x0240 00576 ($REPO/topics/19-repeated-lookup/lookup.go:84)	TBNZ	$0, R8, 148
+	0x0244 00580 ($REPO/topics/19-repeated-lookup/lookup.go:87)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-136(SP), R8
+	0x0248 00584 ($REPO/topics/19-repeated-lookup/lookup.go:87)	ADD	R4<<4, R8, R9
+	0x024c 00588 ($REPO/topics/19-repeated-lookup/lookup.go:87)	LSL	$4, R4, R10
+	0x0250 00592 ($REPO/topics/19-repeated-lookup/lookup.go:87)	MOVD	R6, (R8)(R10)
+	0x0254 00596 ($REPO/topics/19-repeated-lookup/lookup.go:87)	MOVD	R7, 8(R9)
+	0x0258 00600 ($REPO/topics/19-repeated-lookup/lookup.go:87)	MOVD	$1, R6
+	0x025c 00604 ($REPO/topics/19-repeated-lookup/lookup.go:87)	MOVB	R6, (R5)(R4)
+	0x0260 00608 ($REPO/topics/19-repeated-lookup/lookup.go:89)	CMP	$1, R3
+	0x0264 00612 ($REPO/topics/19-repeated-lookup/lookup.go:89)	BEQ	624
+	0x0268 00616 ($REPO/topics/19-repeated-lookup/lookup.go:88)	SUB	$1, R3, R3
+	0x026c 00620 ($REPO/topics/19-repeated-lookup/lookup.go:89)	JMP	148
+	0x0270 00624 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0274 00628 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-136(SP), R20
+	0x0278 00632 ($REPO/topics/19-repeated-lookup/lookup.go:93)	PCDATA	$0, $-2
+	0x0278 00632 ($REPO/topics/19-repeated-lookup/lookup.go:93)	ADR	648, runtime.duffcopy+448(R27)(R27)(REG)
+	0x027c 00636 ($REPO/topics/19-repeated-lookup/lookup.go:93)	STP	(R29, R27), -24(RSP)
+	0x0280 00640 ($REPO/topics/19-repeated-lookup/lookup.go:93)	SUB	$24, RSP, R29
+	0x0284 00644 ($REPO/topics/19-repeated-lookup/lookup.go:93)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0288 00648 ($REPO/topics/19-repeated-lookup/lookup.go:93)	SUB	$8, RSP, R29
+	0x028c 00652 ($REPO/topics/19-repeated-lookup/lookup.go:93)	PCDATA	$0, $-1
+	0x028c 00652 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-8(SP), R0
+	0x0290 00656 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0294 00660 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0298 00664 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-136(SP), R20
+	0x029c 00668 ($REPO/topics/19-repeated-lookup/lookup.go:93)	PCDATA	$0, $-2
+	0x029c 00668 ($REPO/topics/19-repeated-lookup/lookup.go:93)	ADR	684, runtime.duffcopy+448(R27)(R27)(REG)
+	0x02a0 00672 ($REPO/topics/19-repeated-lookup/lookup.go:93)	STP	(R29, R27), -24(RSP)
+	0x02a4 00676 ($REPO/topics/19-repeated-lookup/lookup.go:93)	SUB	$24, RSP, R29
+	0x02a8 00680 ($REPO/topics/19-repeated-lookup/lookup.go:93)	DUFFCOPY	runtime.duffcopy(SB)
+	0x02ac 00684 ($REPO/topics/19-repeated-lookup/lookup.go:93)	SUB	$8, RSP, R29
+	0x02b0 00688 ($REPO/topics/19-repeated-lookup/lookup.go:93)	PCDATA	$0, $-1
+	0x02b0 00688 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-8(SP), R0
+	0x02b4 00692 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x02b8 00696 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD	-8(RSP), R29
+	0x02bc 00700 ($REPO/topics/19-repeated-lookup/lookup.go:93)	MOVD.P	176(RSP), R30
+	0x02c0 00704 ($REPO/topics/19-repeated-lookup/lookup.go:93)	RET	(R30)
+	0x02c4 00708 ($REPO/topics/19-repeated-lookup/lookup.go:78)	MOVD	R3, R1
+	0x02c8 00712 ($REPO/topics/19-repeated-lookup/lookup.go:78)	MOVD	$8, R2
+	0x02cc 00716 ($REPO/topics/19-repeated-lookup/lookup.go:78)	PCDATA	$1, $1
+	0x02cc 00716 ($REPO/topics/19-repeated-lookup/lookup.go:78)	CALL	runtime.panicSliceAlen(SB)
+	0x02d0 00720 ($REPO/topics/19-repeated-lookup/lookup.go:78)	HINT	$0
+	0x02d4 00724 ($REPO/topics/19-repeated-lookup/lookup.go:78)	NOP
+	0x02d4 00724 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$1, $-1
+	0x02d4 00724 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-2
+	0x02d4 00724 ($REPO/topics/19-repeated-lookup/lookup.go:76)	STP	(R0, R1), 144(RSP)
+	0x02d8 00728 ($REPO/topics/19-repeated-lookup/lookup.go:76)	STP	(R2, R3), 160(RSP)
+	0x02dc 00732 ($REPO/topics/19-repeated-lookup/lookup.go:76)	MOVD	R30, R3
+	0x02e0 00736 ($REPO/topics/19-repeated-lookup/lookup.go:76)	CALL	runtime.morestack_noctxt(SB)
+	0x02e4 00740 ($REPO/topics/19-repeated-lookup/lookup.go:76)	PCDATA	$0, $-1
+	0x02e4 00740 ($REPO/topics/19-repeated-lookup/lookup.go:76)	LDP	144(RSP), (R0, R1)
+	0x02e8 00744 ($REPO/topics/19-repeated-lookup/lookup.go:76)	LDP	160(RSP), (R2, R3)
+	0x02ec 00748 ($REPO/topics/19-repeated-lookup/lookup.go:76)	JMP	0
+	0x0000 90 0b 40 f9 f1 c3 00 d1 3f 02 10 eb 49 16 00 54  ..@.....?...I..T
+	0x0010 fe 0f 15 f8 fd 83 1f f8 fd 23 00 d1 e0 a3 00 f9  .........#......
+	0x0020 f4 e3 02 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x0030 00 00 00 94 fd 23 00 d1 ff 9f 00 f9 f4 83 00 91  .....#..........
+	0x0040 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0050 fd 23 00 d1 ff 53 00 f9 7f 20 00 f1 48 13 00 54  .#...S... ..H..T
+	0x0060 63 00 00 b4 e2 03 03 aa 0d 00 00 14 f4 e3 02 91  c...............
+	0x0070 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0080 fd 23 00 d1 ff 9f 00 f9 fd 83 5f f8 fe 07 4b f8  .#........_...K.
+	0x0090 c0 03 5f d6 00 80 00 91 21 04 00 d1 3f 00 00 f1  .._.....!...?...
+	0x00a0 8d 0e 00 54 04 14 40 a9 06 1c 41 a9 bf 14 00 f1  ...T..@...A.....
+	0x00b0 ec 03 00 54 bf 10 00 f1 01 01 00 54 84 00 40 b9  ...T.......T..@.
+	0x00c0 a5 6e 8e d2 a5 4c ae f2 9f 00 05 6b e1 0a 00 54  .n...L.....k...T
+	0x00d0 e4 0b 40 b2 56 00 00 14 bf 14 00 f1 61 0a 00 54  ..@.V.......a..T
+	0x00e0 85 00 40 b9 48 ee 8d d2 a8 8e ae f2 bf 00 08 6b  ..@.H..........k
+	0x00f0 c1 00 00 54 88 10 40 39 1f 95 01 71 61 00 00 54  ...T..@9...qa..T
+	0x0100 e4 03 40 b2 4a 00 00 14 88 4e 8e d2 28 6c ac f2  ..@.J....N..(l..
+	0x0110 bf 00 08 6b a1 08 00 54 84 10 40 39 9f 94 01 71  ...k...T..@9...q
+	0x0120 41 08 00 54 e4 07 7f b2 41 00 00 14 bf 18 00 f1  A..T....A.......
+	0x0130 c1 05 00 54 85 00 80 39 bf c8 01 71 cc 02 00 54  ...T...9...q...T
+	0x0140 85 00 40 b9 a8 ad 8c d2 88 0e ad f2 bf 00 08 6b  ..@............k
+	0x0150 e1 00 00 54 88 08 40 79 e9 8d 8c d2 1f 01 09 6b  ...T..@y.......k
+	0x0160 61 00 00 54 e4 03 1f aa 31 00 00 14 48 ae 8c d2  a..T....1...H...
+	0x0170 e8 2c ad f2 bf 00 08 6b 81 05 00 54 84 08 40 79  .,.....k...T..@y
+	0x0180 e5 cd 8d d2 9f 00 05 6b 01 05 00 54 e4 03 7e b2  .......k...T..~.
+	0x0190 27 00 00 14 85 00 40 b9 68 8e 8e d2 28 8c ae f2  '.....@.h...(...
+	0x01a0 bf 00 08 6b e1 00 00 54 88 08 40 79 a9 6e 8e d2  ...k...T..@y.n..
+	0x01b0 1f 01 09 6b 61 00 00 54 e4 03 7f b2 1c 00 00 14  ...ka..T........
+	0x01c0 88 ae 8c d2 c8 2d ac f2 bf 00 08 6b e1 02 00 54  .....-.....k...T
+	0x01d0 84 08 40 79 c5 8d 8e d2 9f 00 05 6b 61 02 00 54  ..@y.......ka..T
+	0x01e0 a4 00 80 d2 12 00 00 14 bf 1c 00 f1 e1 01 00 54  ...............T
+	0x01f0 85 00 40 b9 68 ae 8c d2 48 ce ae f2 bf 00 08 6b  ..@.h...H......k
+	0x0200 41 01 00 54 85 08 40 79 28 6d 8c d2 bf 00 08 6b  A..T..@y(m.....k
+	0x0210 c1 00 00 54 84 18 40 39 9f 94 01 71 61 00 00 54  ...T..@9...qa..T
+	0x0220 e4 07 40 b2 02 00 00 14 04 00 80 92 44 f3 ff b7  ..@.........D...
+	0x0230 5f 00 04 eb 0d f3 ff 54 e5 83 02 91 a8 68 64 38  _......T.....hd8
+	0x0240 a8 f2 07 37 e8 83 00 91 09 11 04 8b 8a ec 7c d3  ...7..........|.
+	0x0250 06 69 2a f8 27 05 00 f9 e6 03 40 b2 a6 68 24 38  .i*.'.....@..h$8
+	0x0260 7f 04 00 f1 60 00 00 54 63 04 00 d1 8a ff ff 17  ....`..Tc.......
+	0x0270 f5 e3 02 91 f4 83 00 91 9b 00 00 10 fd ef 3e a9  ..............>.
+	0x0280 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 53 40 f9  .c.......#...S@.
+	0x0290 e0 9f 00 f9 f5 e3 02 91 f4 83 00 91 9b 00 00 10  ................
+	0x02a0 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x02b0 e0 53 40 f9 e0 9f 00 f9 fd 83 5f f8 fe 07 4b f8  .S@......._...K.
+	0x02c0 c0 03 5f d6 e1 03 03 aa e2 03 7d b2 00 00 00 94  .._.......}.....
+	0x02d0 1f 20 03 d5 e0 07 09 a9 e2 0f 0a a9 e3 03 1e aa  . ..............
+	0x02e0 00 00 00 94 e0 07 49 a9 e2 0f 4a a9 45 ff ff 17  ......I...J.E...
+	rel 48+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 76+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 124+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 644+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 680+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 716+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 736+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex STEXT size=224 args=0x18 locals=0x48 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:100)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex(SB), ABIInternal, $80-24
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:100)	CMP	R16, RSP
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:100)	BLS	196
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$0, $-1
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD.W	R30, -80(RSP)
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD	R29, -8(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:100)	SUB	$8, RSP, R29
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:100)	FUNCDATA	$0, gclocals·mwFurZyQFy+ezr0Dhah66w==(SB)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:100)	FUNCDATA	$1, gclocals·zjGmflWeiXhYzDBVzfnWOA==(SB)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:100)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex.arginfo1(SB)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:100)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex.argliveinfo(SB)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$3, $1
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:102)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:102)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:102)	PCDATA	$3, $2
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:101)	MOVD	$type:map[string]string(SB), R0
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:101)	MOVD	ZR, R2
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:101)	PCDATA	$1, $0
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:101)	CALL	runtime.makemap(SB)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:101)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.index-16(SP)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:102)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP), R3
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:102)	SUB	$1, R3, R3
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:102)	JMP	80
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:103)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	R5, (R0)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:102)	PCDATA	$0, $-1
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:102)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-32(SP), R4
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:102)	SUB	$1, R4, R3
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.index-16(SP), R0
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:102)	TBNZ	$63, R3, 184
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:102)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-32(SP)
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:103)	LSL	$5, R3, R4
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP), R5
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	(R5)(R4), R2
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:103)	ADD	R3<<5, R5, R4
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:103)	LDP	8(R4), (R3, R5)
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	R5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_8-8(SP)
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	24(R4), R4
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-24(SP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	R0, R1
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	$type:map[string]string(SB), R0
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:103)	PCDATA	$1, $1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:103)	CALL	runtime.mapassign_faststr(SB)
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-24(SP), R4
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	R4, 8(R0)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:103)	PCDATA	$0, $-3
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVWU	runtime.writeBarrier(SB), R4
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:103)	PCDATA	$0, $-1
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:103)	PCDATA	$0, $-2
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:103)	CBNZW	R4, 164
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_8-8(SP), R5
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:103)	JMP	64
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	(R0), R4
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:103)	CALL	runtime.gcWriteBarrier2(SB)
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:103)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_8-8(SP), R5
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:103)	STP	(R5, R4), (R25)
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:103)	JMP	64
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:105)	PCDATA	$0, $-1
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:105)	MOVD	-8(RSP), R29
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:105)	MOVD.P	80(RSP), R30
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:105)	RET	(R30)
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:105)	NOP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$1, $-1
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$0, $-2
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:100)	STP	(R0, R1), 8(RSP)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD	R2, 24(RSP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD	R30, R3
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:100)	CALL	runtime.morestack_noctxt(SB)
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:100)	PCDATA	$0, $-1
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:100)	LDP	8(RSP), (R0, R1)
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:100)	MOVD	24(RSP), R2
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:100)	JMP	0
+	0x0000 90 0b 40 f9 ff 63 30 eb e9 05 00 54 fe 0f 1b f8  ..@..c0....T....
+	0x0010 fd 83 1f f8 fd 23 00 d1 e1 33 00 f9 e0 2f 00 f9  .....#...3.../..
+	0x0020 00 00 00 90 00 00 00 91 e2 03 1f aa 00 00 00 94  ................
+	0x0030 e0 1f 00 f9 e3 33 40 f9 63 04 00 d1 05 00 00 14  .....3@.c.......
+	0x0040 05 00 00 f9 e4 17 40 f9 83 04 00 d1 e0 1f 40 f9  ......@.......@.
+	0x0050 43 03 f8 b7 e3 17 00 f9 64 e8 7b d3 e5 2f 40 f9  C.......d.{../@.
+	0x0060 a2 68 64 f8 a4 14 03 8b 83 94 40 a9 e5 23 00 f9  .hd.......@..#..
+	0x0070 84 0c 40 f9 e4 1b 00 f9 e1 03 00 aa 00 00 00 90  ..@.............
+	0x0080 00 00 00 91 00 00 00 94 e4 1b 40 f9 04 04 00 f9  ..........@.....
+	0x0090 1b 00 00 90 64 03 40 b9 64 00 00 35 e5 23 40 f9  ....d.@.d..5.#@.
+	0x00a0 e8 ff ff 17 04 00 40 f9 00 00 00 94 e5 23 40 f9  ......@......#@.
+	0x00b0 25 13 00 a9 e3 ff ff 17 fd 83 5f f8 fe 07 45 f8  %........._...E.
+	0x00c0 c0 03 5f d6 e0 87 00 a9 e2 0f 00 f9 e3 03 1e aa  .._.............
+	0x00d0 00 00 00 94 e0 87 40 a9 e2 0f 40 f9 c9 ff ff 17  ......@...@.....
+	rel 32+8 t=R_ADDRARM64 type:map[string]string+0
+	rel 44+4 t=R_CALLARM64 runtime.makemap+0
+	rel 124+8 t=R_ADDRARM64 type:map[string]string+0
+	rel 132+4 t=R_CALLARM64 runtime.mapassign_faststr+0
+	rel 144+8 t=R_ARM64_PCREL_LDST32 runtime.writeBarrier+0
+	rel 168+4 t=R_CALLARM64 runtime.gcWriteBarrier2+0
+	rel 208+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated STEXT size=336 args=0x98 locals=0xc8 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:109)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated(SB), ABIInternal, $208-152
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:109)	SUB	$80, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:109)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:109)	BLS	304
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD.W	R30, -208(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD	R29, -8(RSP)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:109)	SUB	$8, RSP, R29
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	FUNCDATA	$0, gclocals·57jgxN6XypxNeXGdxxsh9Q==(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	FUNCDATA	$1, gclocals·/w3ffc8Rrwvso8egBnqJcw==(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$3, $1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-2
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:109)	ADR	48, runtime.duffzero+224(R27)(R27)(REG)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:109)	STP	(R29, R27), -24(RSP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:109)	SUB	$24, RSP, R29
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:109)	DUFFZERO	runtime.duffzero(SB)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:109)	SUB	$8, RSP, R29
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-1
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:110)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:110)	PCDATA	$0, $-2
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:110)	ADR	76, runtime.duffzero+224(R27)(R27)(REG)
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:110)	STP	(R29, R27), -24(RSP)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:110)	SUB	$24, RSP, R29
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:110)	DUFFZERO	runtime.duffzero(SB)
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:110)	SUB	$8, RSP, R29
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:110)	PCDATA	$0, $-1
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:110)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP)
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:111)	CMP	$8, R1
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:111)	BHI	292
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP)
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:111)	PCDATA	$3, $-1
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys(SB), R4
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	ZR, R2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:111)	JMP	200
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-152(SP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_19-8(SP)
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:111)	LDP	(R4), (R2, R3)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	R0, R1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	$type:map[string]string(SB), R0
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:112)	PCDATA	$1, $1
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:112)	CALL	runtime.mapaccess2_faststr(SB)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R4
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-152(SP), R5
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:112)	ADD	R5<<4, R4, R6
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:112)	LSL	$4, R5, R7
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:112)	LDP	(R0), (R8, R9)
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	R8, (R4)(R7)
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	R9, 8(R6)
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R4
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVB	R1, (R4)(R5)
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_19-8(SP), R4
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:111)	ADD	$16, R4, R4
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:111)	ADD	$1, R5, R2
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:112)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R0
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP), R1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:111)	CMP	R2, R1
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:111)	BGT	116
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:114)	PCDATA	$0, $-2
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:114)	ADR	232, runtime.duffcopy+448(R27)(R27)(REG)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:114)	STP	(R29, R27), -24(RSP)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:114)	SUB	$24, RSP, R29
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:114)	DUFFCOPY	runtime.duffcopy(SB)
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:114)	SUB	$8, RSP, R29
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:114)	PCDATA	$0, $-1
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R0
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:114)	PCDATA	$0, $-2
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:114)	ADR	268, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:114)	STP	(R29, R27), -24(RSP)
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:114)	SUB	$24, RSP, R29
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:114)	DUFFCOPY	runtime.duffcopy(SB)
+	0x010c 00268 ($REPO/topics/19-repeated-lookup/lookup.go:114)	SUB	$8, RSP, R29
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:114)	PCDATA	$0, $-1
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R0
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD	-8(RSP), R29
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:114)	MOVD.P	208(RSP), R30
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:114)	RET	(R30)
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:114)	PCDATA	$3, $1
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:111)	MOVD	$8, R2
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:111)	PCDATA	$1, $2
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:111)	CALL	runtime.panicSliceAlen(SB)
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:111)	HINT	$0
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:111)	NOP
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$1, $-1
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-2
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:109)	STP	(R0, R1), 144(RSP)
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:109)	MOVD	R30, R3
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:109)	CALL	runtime.morestack_noctxt(SB)
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:109)	PCDATA	$0, $-1
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:109)	LDP	144(RSP), (R0, R1)
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:109)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 01 d1 3f 02 10 eb 29 09 00 54  ..@..C..?...)..T
+	0x0010 fe 0f 13 f8 fd 83 1f f8 fd 23 00 d1 f4 63 03 91  .........#...c..
+	0x0020 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0030 fd 23 00 d1 ff af 00 f9 f4 e3 00 91 9b 00 00 10  .#..............
+	0x0040 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0050 ff 5f 00 f9 3f 20 00 f1 68 06 00 54 e0 b3 00 f9  ._..? ..h..T....
+	0x0060 e1 b7 00 f9 04 00 00 90 84 00 00 91 e2 03 1f aa  ................
+	0x0070 16 00 00 14 e2 1b 00 f9 e4 63 00 f9 82 0c 40 a9  .........c....@.
+	0x0080 e1 03 00 aa 00 00 00 90 00 00 00 91 00 00 00 94  ................
+	0x0090 e4 e3 00 91 e5 1b 40 f9 86 10 05 8b a7 ec 7c d3  ......@.......|.
+	0x00a0 08 24 40 a9 88 68 27 f8 c9 04 00 f9 e4 e3 02 91  .$@..h'.........
+	0x00b0 81 68 25 38 e4 63 40 f9 84 40 00 91 a2 04 00 91  .h%8.c@..@......
+	0x00c0 e0 b3 40 f9 e1 b7 40 f9 3f 00 02 eb 4c fd ff 54  ..@...@.?...L..T
+	0x00d0 f5 63 03 91 f4 e3 00 91 9b 00 00 10 fd ef 3e a9  .c............>.
+	0x00e0 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 5f 40 f9  .c.......#..._@.
+	0x00f0 e0 af 00 f9 f5 63 03 91 f4 e3 00 91 9b 00 00 10  .....c..........
+	0x0100 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0110 e0 5f 40 f9 e0 af 00 f9 fd 83 5f f8 fe 07 4d f8  ._@......._...M.
+	0x0120 c0 03 5f d6 e2 03 7d b2 00 00 00 94 1f 20 03 d5  .._...}...... ..
+	0x0130 e0 07 09 a9 e3 03 1e aa 00 00 00 94 e0 07 49 a9  ..............I.
+	0x0140 b0 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 44+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 72+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 100+8 t=R_ADDRARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys+0
+	rel 132+8 t=R_ADDRARM64 type:map[string]string+0
+	rel 140+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 228+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 264+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 296+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 312+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeatedNoise STEXT size=336 args=0x98 locals=0xc8 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:118)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeatedNoise(SB), ABIInternal, $208-152
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:118)	SUB	$80, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:118)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:118)	BLS	304
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD.W	R30, -208(RSP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD	R29, -8(RSP)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:118)	SUB	$8, RSP, R29
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	FUNCDATA	$0, gclocals·57jgxN6XypxNeXGdxxsh9Q==(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	FUNCDATA	$1, gclocals·/w3ffc8Rrwvso8egBnqJcw==(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeatedNoise.arginfo1(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeatedNoise.argliveinfo(SB)
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$3, $1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-2
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:118)	ADR	48, runtime.duffzero+224(R27)(R27)(REG)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:118)	STP	(R29, R27), -24(RSP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:118)	SUB	$24, RSP, R29
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:118)	DUFFZERO	runtime.duffzero(SB)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:118)	SUB	$8, RSP, R29
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-1
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:119)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:119)	PCDATA	$0, $-2
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:119)	ADR	76, runtime.duffzero+224(R27)(R27)(REG)
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:119)	STP	(R29, R27), -24(RSP)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:119)	SUB	$24, RSP, R29
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:119)	DUFFZERO	runtime.duffzero(SB)
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:119)	SUB	$8, RSP, R29
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:119)	PCDATA	$0, $-1
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:119)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP)
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:120)	CMP	$8, R1
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:120)	BHI	292
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP)
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:120)	PCDATA	$3, $-1
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys(SB), R4
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	ZR, R2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:120)	JMP	200
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-152(SP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_19-8(SP)
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:120)	LDP	(R4), (R2, R3)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	R0, R1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	$type:map[string]string(SB), R0
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:121)	PCDATA	$1, $1
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:121)	CALL	runtime.mapaccess2_faststr(SB)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R4
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.i-152(SP), R5
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:121)	ADD	R5<<4, R4, R6
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:121)	LSL	$4, R5, R7
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:121)	LDP	(R0), (R8, R9)
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	R8, (R4)(R7)
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	R9, 8(R6)
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R4
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVB	R1, (R4)(R5)
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_19-8(SP), R4
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:120)	ADD	$16, R4, R4
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:120)	ADD	$1, R5, R2
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:121)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP), R0
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP), R1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:120)	CMP	R2, R1
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:120)	BGT	116
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:123)	PCDATA	$0, $-2
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:123)	ADR	232, runtime.duffcopy+448(R27)(R27)(REG)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:123)	STP	(R29, R27), -24(RSP)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:123)	SUB	$24, RSP, R29
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:123)	DUFFCOPY	runtime.duffcopy(SB)
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:123)	SUB	$8, RSP, R29
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:123)	PCDATA	$0, $-1
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R0
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-144(SP), R20
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:123)	PCDATA	$0, $-2
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:123)	ADR	268, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:123)	STP	(R29, R27), -24(RSP)
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:123)	SUB	$24, RSP, R29
+	0x0108 00264 ($REPO/topics/19-repeated-lookup/lookup.go:123)	DUFFCOPY	runtime.duffcopy(SB)
+	0x010c 00268 ($REPO/topics/19-repeated-lookup/lookup.go:123)	SUB	$8, RSP, R29
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:123)	PCDATA	$0, $-1
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-16(SP), R0
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD	-8(RSP), R29
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:123)	MOVD.P	208(RSP), R30
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:123)	RET	(R30)
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:123)	PCDATA	$3, $1
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:120)	MOVD	$8, R2
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:120)	PCDATA	$1, $2
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:120)	CALL	runtime.panicSliceAlen(SB)
+	0x012c 00300 ($REPO/topics/19-repeated-lookup/lookup.go:120)	HINT	$0
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:120)	NOP
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$1, $-1
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-2
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:118)	STP	(R0, R1), 144(RSP)
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:118)	MOVD	R30, R3
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:118)	CALL	runtime.morestack_noctxt(SB)
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:118)	PCDATA	$0, $-1
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:118)	LDP	144(RSP), (R0, R1)
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:118)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 01 d1 3f 02 10 eb 29 09 00 54  ..@..C..?...)..T
+	0x0010 fe 0f 13 f8 fd 83 1f f8 fd 23 00 d1 f4 63 03 91  .........#...c..
+	0x0020 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0030 fd 23 00 d1 ff af 00 f9 f4 e3 00 91 9b 00 00 10  .#..............
+	0x0040 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0050 ff 5f 00 f9 3f 20 00 f1 68 06 00 54 e0 b3 00 f9  ._..? ..h..T....
+	0x0060 e1 b7 00 f9 04 00 00 90 84 00 00 91 e2 03 1f aa  ................
+	0x0070 16 00 00 14 e2 1b 00 f9 e4 63 00 f9 82 0c 40 a9  .........c....@.
+	0x0080 e1 03 00 aa 00 00 00 90 00 00 00 91 00 00 00 94  ................
+	0x0090 e4 e3 00 91 e5 1b 40 f9 86 10 05 8b a7 ec 7c d3  ......@.......|.
+	0x00a0 08 24 40 a9 88 68 27 f8 c9 04 00 f9 e4 e3 02 91  .$@..h'.........
+	0x00b0 81 68 25 38 e4 63 40 f9 84 40 00 91 a2 04 00 91  .h%8.c@..@......
+	0x00c0 e0 b3 40 f9 e1 b7 40 f9 3f 00 02 eb 4c fd ff 54  ..@...@.?...L..T
+	0x00d0 f5 63 03 91 f4 e3 00 91 9b 00 00 10 fd ef 3e a9  .c............>.
+	0x00e0 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 5f 40 f9  .c.......#..._@.
+	0x00f0 e0 af 00 f9 f5 63 03 91 f4 e3 00 91 9b 00 00 10  .....c..........
+	0x0100 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0110 e0 5f 40 f9 e0 af 00 f9 fd 83 5f f8 fe 07 4d f8  ._@......._...M.
+	0x0120 c0 03 5f d6 e2 03 7d b2 00 00 00 94 1f 20 03 d5  .._...}...... ..
+	0x0130 e0 07 09 a9 e3 03 1e aa 00 00 00 94 e0 07 49 a9  ..............I.
+	0x0140 b0 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 44+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 72+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 100+8 t=R_ADDRARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.queryKeys+0
+	rel 132+8 t=R_ADDRARM64 type:map[string]string+0
+	rel 140+4 t=R_CALLARM64 runtime.mapaccess2_faststr+0
+	rel 228+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 264+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 296+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 312+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapScan STEXT size=800 args=0x98 locals=0x118 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:130)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapScan(SB), ABIInternal, $288-152
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:130)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:130)	SUB	$160, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:130)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:130)	BLS	780
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:130)	SUB	$288, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:130)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:130)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:130)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	FUNCDATA	$0, gclocals·L6IwNSiIg9JMrktsOF/JeQ==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	FUNCDATA	$1, gclocals·2Qxag+2gXvZplugIkzx0jw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	FUNCDATA	$2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapScan.stkobj(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapScan.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapScan.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:130)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-2
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:130)	ADR	52, runtime.duffzero+224(R27)(R27)(REG)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:130)	STP	(R29, R27), -24(RSP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:130)	SUB	$24, RSP, R29
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:130)	DUFFZERO	runtime.duffzero(SB)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:130)	SUB	$8, RSP, R29
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-1
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:130)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:131)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-232(SP), R20
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:131)	PCDATA	$0, $-2
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:131)	ADR	80, runtime.duffzero+224(R27)(R27)(REG)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:131)	STP	(R29, R27), -24(RSP)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:131)	SUB	$24, RSP, R29
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:131)	DUFFZERO	runtime.duffzero(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:131)	SUB	$8, RSP, R29
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:131)	PCDATA	$0, $-1
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:131)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-104(SP)
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:132)	CMP	$8, R1
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:132)	BHI	768
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:133)	CBZ	R1, 160
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:132)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:132)	PCDATA	$3, $2
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_12-96(SP), R20
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:136)	PCDATA	$0, $-2
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:136)	ADR	124, runtime.duffzero+232(R27)(R27)(REG)
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:136)	STP	(R29, R27), -24(RSP)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:136)	SUB	$24, RSP, R29
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:136)	DUFFZERO	runtime.duffzero(SB)
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:136)	SUB	$8, RSP, R29
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:136)	PCDATA	$0, $-1
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	R0, R1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_12-96(SP), R2
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	$type:map[string]string(SB), R0
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:136)	PCDATA	$1, $1
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:136)	CALL	runtime.mapIterStart(SB)
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP), R3
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:132)	MOVD	R3, R0
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:136)	JMP	220
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:136)	PCDATA	$3, $1
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:134)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:134)	PCDATA	$0, $-2
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:134)	ADR	180, runtime.duffzero+224(R27)(R27)(REG)
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:134)	STP	(R29, R27), -24(RSP)
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:134)	SUB	$24, RSP, R29
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:134)	DUFFZERO	runtime.duffzero(SB)
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:134)	SUB	$8, RSP, R29
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:134)	PCDATA	$0, $-1
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:134)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:134)	LDP	-8(RSP), (R29, R30)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:134)	ADD	$288, RSP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:134)	RET	(R30)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:134)	PCDATA	$3, $2
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:142)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.remaining-240(SP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_12-96(SP), R0
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:136)	CALL	runtime.mapIterNext(SB)
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:138)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+144(FP), R0
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:142)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.remaining-240(SP), R3
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_12-96(SP), R1
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:136)	CBZ	R1, 684
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:136)	LDP	(R1), (R1, R2)
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:136)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_12-88(SP), R4
+	0x00ec 00236 ($REPO/topics/19-repeated-lookup/lookup.go:136)	LDP	(R4), (R4, R5)
+	0x00f0 00240 (<unknown line number>)	NOP
+	0x00f0 00240 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMP	$5, R2
+	0x00f4 00244 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BGT	368
+	0x00f8 00248 ($REPO/topics/19-repeated-lookup/lookup.go:34)	CMP	$4, R2
+	0x00fc 00252 ($REPO/topics/19-repeated-lookup/lookup.go:34)	BNE	284
+	0x0100 00256 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVWU	(R1), R1
+	0x0104 00260 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVD	$1919251317, R2
+	0x010c 00268 ($REPO/topics/19-repeated-lookup/lookup.go:34)	CMPW	R2, R1
+	0x0110 00272 ($REPO/topics/19-repeated-lookup/lookup.go:34)	BNE	620
+	0x0114 00276 ($REPO/topics/19-repeated-lookup/lookup.go:34)	MOVD	$7, R1
+	0x0118 00280 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x011c 00284 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMP	$5, R2
+	0x0120 00288 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	620
+	0x0124 00292 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVWU	(R1), R2
+	0x0128 00296 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVD	$1953853298, R6
+	0x0130 00304 ($REPO/topics/19-repeated-lookup/lookup.go:22)	CMPW	R6, R2
+	0x0134 00308 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	332
+	0x0138 00312 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVBU	4(R1), R6
+	0x013c 00316 ($REPO/topics/19-repeated-lookup/lookup.go:22)	CMPW	$101, R6
+	0x0140 00320 ($REPO/topics/19-repeated-lookup/lookup.go:22)	BNE	332
+	0x0144 00324 ($REPO/topics/19-repeated-lookup/lookup.go:22)	MOVD	$1, R1
+	0x0148 00328 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x014c 00332 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVD	$1667330676, R6
+	0x0154 00340 ($REPO/topics/19-repeated-lookup/lookup.go:32)	CMPW	R6, R2
+	0x0158 00344 ($REPO/topics/19-repeated-lookup/lookup.go:32)	BNE	620
+	0x015c 00348 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVBU	4(R1), R1
+	0x0160 00352 ($REPO/topics/19-repeated-lookup/lookup.go:32)	CMPW	$101, R1
+	0x0164 00356 ($REPO/topics/19-repeated-lookup/lookup.go:32)	BNE	620
+	0x0168 00360 ($REPO/topics/19-repeated-lookup/lookup.go:32)	MOVD	$6, R1
+	0x016c 00364 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x0170 00368 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMP	$6, R2
+	0x0174 00372 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	556
+	0x0178 00376 ($REPO/topics/19-repeated-lookup/lookup.go:19)	MOVB	(R1), R2
+	0x017c 00380 ($REPO/topics/19-repeated-lookup/lookup.go:19)	CMPW	$114, R2
+	0x0180 00384 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BGT	472
+	0x0184 00388 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVWU	(R1), R2
+	0x0188 00392 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVD	$1752458605, R6
+	0x0190 00400 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMPW	R6, R2
+	0x0194 00404 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	432
+	0x0198 00408 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVHU	4(R1), R6
+	0x019c 00412 ($REPO/topics/19-repeated-lookup/lookup.go:20)	MOVD	$25711, R7
+	0x01a0 00416 ($REPO/topics/19-repeated-lookup/lookup.go:20)	CMPW	R7, R6
+	0x01a4 00420 ($REPO/topics/19-repeated-lookup/lookup.go:20)	BNE	432
+	0x01a8 00424 ($REPO/topics/19-repeated-lookup/lookup.go:137)	MOVD	ZR, R1
+	0x01ac 00428 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x01b0 00432 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$1768383858, R6
+	0x01b8 00440 ($REPO/topics/19-repeated-lookup/lookup.go:28)	CMPW	R6, R2
+	0x01bc 00444 ($REPO/topics/19-repeated-lookup/lookup.go:28)	BNE	620
+	0x01c0 00448 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVHU	4(R1), R1
+	0x01c4 00452 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$28271, R2
+	0x01c8 00456 ($REPO/topics/19-repeated-lookup/lookup.go:28)	CMPW	R2, R1
+	0x01cc 00460 ($REPO/topics/19-repeated-lookup/lookup.go:28)	BNE	620
+	0x01d0 00464 ($REPO/topics/19-repeated-lookup/lookup.go:28)	MOVD	$4, R1
+	0x01d4 00468 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x01d8 00472 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVWU	(R1), R2
+	0x01dc 00476 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$1952543859, R6
+	0x01e4 00484 ($REPO/topics/19-repeated-lookup/lookup.go:24)	CMPW	R6, R2
+	0x01e8 00488 ($REPO/topics/19-repeated-lookup/lookup.go:24)	BNE	516
+	0x01ec 00492 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVHU	4(R1), R6
+	0x01f0 00496 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$29557, R7
+	0x01f4 00500 ($REPO/topics/19-repeated-lookup/lookup.go:24)	CMPW	R7, R6
+	0x01f8 00504 ($REPO/topics/19-repeated-lookup/lookup.go:24)	BNE	516
+	0x01fc 00508 ($REPO/topics/19-repeated-lookup/lookup.go:24)	MOVD	$2, R1
+	0x0200 00512 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x0204 00516 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$1634624884, R6
+	0x020c 00524 ($REPO/topics/19-repeated-lookup/lookup.go:30)	CMPW	R6, R2
+	0x0210 00528 ($REPO/topics/19-repeated-lookup/lookup.go:30)	BNE	620
+	0x0214 00532 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVHU	4(R1), R1
+	0x0218 00536 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$29806, R2
+	0x021c 00540 ($REPO/topics/19-repeated-lookup/lookup.go:30)	CMPW	R2, R1
+	0x0220 00544 ($REPO/topics/19-repeated-lookup/lookup.go:30)	BNE	620
+	0x0224 00548 ($REPO/topics/19-repeated-lookup/lookup.go:30)	MOVD	$5, R1
+	0x0228 00552 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x022c 00556 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMP	$7, R2
+	0x0230 00560 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	620
+	0x0234 00564 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVWU	(R1), R2
+	0x0238 00568 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$1987208563, R6
+	0x0240 00576 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	R6, R2
+	0x0244 00580 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	620
+	0x0248 00584 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVHU	4(R1), R2
+	0x024c 00588 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$25449, R6
+	0x0250 00592 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	R6, R2
+	0x0254 00596 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	620
+	0x0258 00600 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVBU	6(R1), R1
+	0x025c 00604 ($REPO/topics/19-repeated-lookup/lookup.go:26)	CMPW	$101, R1
+	0x0260 00608 ($REPO/topics/19-repeated-lookup/lookup.go:26)	BNE	620
+	0x0264 00612 ($REPO/topics/19-repeated-lookup/lookup.go:26)	MOVD	$3, R1
+	0x0268 00616 ($REPO/topics/19-repeated-lookup/lookup.go:137)	JMP	624
+	0x026c 00620 ($REPO/topics/19-repeated-lookup/lookup.go:137)	MOVD	$-1, R1
+	0x0270 00624 ($REPO/topics/19-repeated-lookup/lookup.go:138)	TBNZ	$63, R1, 200
+	0x0274 00628 ($REPO/topics/19-repeated-lookup/lookup.go:138)	CMP	R1, R0
+	0x0278 00632 ($REPO/topics/19-repeated-lookup/lookup.go:138)	BLE	200
+	0x027c 00636 ($REPO/topics/19-repeated-lookup/lookup.go:141)	LSL	$4, R1, R2
+	0x0280 00640 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-232(SP), R6
+	0x0284 00644 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVD	R4, (R6)(R2)
+	0x0288 00648 ($REPO/topics/19-repeated-lookup/lookup.go:141)	ADD	R1<<4, R6, R2
+	0x028c 00652 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVD	R5, 8(R2)
+	0x0290 00656 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVD	$1, R2
+	0x0294 00660 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-104(SP), R4
+	0x0298 00664 ($REPO/topics/19-repeated-lookup/lookup.go:141)	MOVB	R2, (R4)(R1)
+	0x029c 00668 ($REPO/topics/19-repeated-lookup/lookup.go:143)	CMP	$1, R3
+	0x02a0 00672 ($REPO/topics/19-repeated-lookup/lookup.go:143)	BEQ	684
+	0x02a4 00676 ($REPO/topics/19-repeated-lookup/lookup.go:142)	SUB	$1, R3, R3
+	0x02a8 00680 ($REPO/topics/19-repeated-lookup/lookup.go:143)	JMP	200
+	0x02ac 00684 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x02b0 00688 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-232(SP), R20
+	0x02b4 00692 ($REPO/topics/19-repeated-lookup/lookup.go:147)	PCDATA	$0, $-2
+	0x02b4 00692 ($REPO/topics/19-repeated-lookup/lookup.go:147)	ADR	708, runtime.duffcopy+448(R27)(R27)(REG)
+	0x02b8 00696 ($REPO/topics/19-repeated-lookup/lookup.go:147)	STP	(R29, R27), -24(RSP)
+	0x02bc 00700 ($REPO/topics/19-repeated-lookup/lookup.go:147)	SUB	$24, RSP, R29
+	0x02c0 00704 ($REPO/topics/19-repeated-lookup/lookup.go:147)	DUFFCOPY	runtime.duffcopy(SB)
+	0x02c4 00708 ($REPO/topics/19-repeated-lookup/lookup.go:147)	SUB	$8, RSP, R29
+	0x02c8 00712 ($REPO/topics/19-repeated-lookup/lookup.go:147)	PCDATA	$0, $-1
+	0x02c8 00712 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-104(SP), R0
+	0x02cc 00716 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x02d0 00720 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x02d4 00724 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-232(SP), R20
+	0x02d8 00728 ($REPO/topics/19-repeated-lookup/lookup.go:147)	PCDATA	$0, $-2
+	0x02d8 00728 ($REPO/topics/19-repeated-lookup/lookup.go:147)	ADR	744, runtime.duffcopy+448(R27)(R27)(REG)
+	0x02dc 00732 ($REPO/topics/19-repeated-lookup/lookup.go:147)	STP	(R29, R27), -24(RSP)
+	0x02e0 00736 ($REPO/topics/19-repeated-lookup/lookup.go:147)	SUB	$24, RSP, R29
+	0x02e4 00740 ($REPO/topics/19-repeated-lookup/lookup.go:147)	DUFFCOPY	runtime.duffcopy(SB)
+	0x02e8 00744 ($REPO/topics/19-repeated-lookup/lookup.go:147)	SUB	$8, RSP, R29
+	0x02ec 00748 ($REPO/topics/19-repeated-lookup/lookup.go:147)	PCDATA	$0, $-1
+	0x02ec 00748 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.out-104(SP), R0
+	0x02f0 00752 ($REPO/topics/19-repeated-lookup/lookup.go:147)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x02f4 00756 ($REPO/topics/19-repeated-lookup/lookup.go:147)	LDP	-8(RSP), (R29, R30)
+	0x02f8 00760 ($REPO/topics/19-repeated-lookup/lookup.go:147)	ADD	$288, RSP
+	0x02fc 00764 ($REPO/topics/19-repeated-lookup/lookup.go:147)	RET	(R30)
+	0x0300 00768 ($REPO/topics/19-repeated-lookup/lookup.go:147)	PCDATA	$3, $1
+	0x0300 00768 ($REPO/topics/19-repeated-lookup/lookup.go:132)	MOVD	$8, R2
+	0x0304 00772 ($REPO/topics/19-repeated-lookup/lookup.go:132)	PCDATA	$1, $2
+	0x0304 00772 ($REPO/topics/19-repeated-lookup/lookup.go:132)	CALL	runtime.panicSliceAlen(SB)
+	0x0308 00776 ($REPO/topics/19-repeated-lookup/lookup.go:132)	HINT	$0
+	0x030c 00780 ($REPO/topics/19-repeated-lookup/lookup.go:132)	NOP
+	0x030c 00780 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$1, $-1
+	0x030c 00780 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-2
+	0x030c 00780 ($REPO/topics/19-repeated-lookup/lookup.go:130)	STP	(R0, R1), 144(RSP)
+	0x0310 00784 ($REPO/topics/19-repeated-lookup/lookup.go:130)	MOVD	R30, R3
+	0x0314 00788 ($REPO/topics/19-repeated-lookup/lookup.go:130)	CALL	runtime.morestack_noctxt(SB)
+	0x0318 00792 ($REPO/topics/19-repeated-lookup/lookup.go:130)	PCDATA	$0, $-1
+	0x0318 00792 ($REPO/topics/19-repeated-lookup/lookup.go:130)	LDP	144(RSP), (R0, R1)
+	0x031c 00796 ($REPO/topics/19-repeated-lookup/lookup.go:130)	JMP	0
+	0x0000 90 0b 40 f9 f1 83 02 d1 3f 02 10 eb 09 18 00 54  ..@.....?......T
+	0x0010 f4 83 04 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  ......?......#..
+	0x0020 f4 a3 04 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x0030 00 00 00 94 fd 23 00 d1 ff d7 00 f9 f4 c3 00 91  .....#..........
+	0x0040 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0050 fd 23 00 d1 ff 5b 00 f9 3f 20 00 f1 28 15 00 54  .#...[..? ..(..T
+	0x0060 01 02 00 b4 e1 df 00 f9 f4 e3 02 91 9b 00 00 10  ................
+	0x0070 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0080 e1 03 00 aa e2 e3 02 91 00 00 00 90 00 00 00 91  ................
+	0x0090 00 00 00 94 e3 df 40 f9 e0 03 03 aa 10 00 00 14  ......@.........
+	0x00a0 f4 a3 04 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x00b0 00 00 00 94 fd 23 00 d1 ff d7 00 f9 fd fb 7f a9  .....#..........
+	0x00c0 ff 83 04 91 c0 03 5f d6 e3 17 00 f9 e0 e3 02 91  ......_.........
+	0x00d0 00 00 00 94 e0 df 40 f9 e3 17 40 f9 e1 5f 40 f9  ......@...@.._@.
+	0x00e0 61 0e 00 b4 21 08 40 a9 e4 63 40 f9 84 14 40 a9  a...!.@..c@...@.
+	0x00f0 5f 14 00 f1 ec 03 00 54 5f 10 00 f1 01 01 00 54  _......T_......T
+	0x0100 21 00 40 b9 a2 6e 8e d2 a2 4c ae f2 3f 00 02 6b  !.@..n...L..?..k
+	0x0110 e1 0a 00 54 e1 0b 40 b2 56 00 00 14 5f 14 00 f1  ...T..@.V..._...
+	0x0120 61 0a 00 54 22 00 40 b9 46 ee 8d d2 a6 8e ae f2  a..T".@.F.......
+	0x0130 5f 00 06 6b c1 00 00 54 26 10 40 39 df 94 01 71  _..k...T&.@9...q
+	0x0140 61 00 00 54 e1 03 40 b2 4a 00 00 14 86 4e 8e d2  a..T..@.J....N..
+	0x0150 26 6c ac f2 5f 00 06 6b a1 08 00 54 21 10 40 39  &l.._..k...T!.@9
+	0x0160 3f 94 01 71 41 08 00 54 e1 07 7f b2 41 00 00 14  ?..qA..T....A...
+	0x0170 5f 18 00 f1 c1 05 00 54 22 00 80 39 5f c8 01 71  _......T"..9_..q
+	0x0180 cc 02 00 54 22 00 40 b9 a6 ad 8c d2 86 0e ad f2  ...T".@.........
+	0x0190 5f 00 06 6b e1 00 00 54 26 08 40 79 e7 8d 8c d2  _..k...T&.@y....
+	0x01a0 df 00 07 6b 61 00 00 54 e1 03 1f aa 31 00 00 14  ...ka..T....1...
+	0x01b0 46 ae 8c d2 e6 2c ad f2 5f 00 06 6b 81 05 00 54  F....,.._..k...T
+	0x01c0 21 08 40 79 e2 cd 8d d2 3f 00 02 6b 01 05 00 54  !.@y....?..k...T
+	0x01d0 e1 03 7e b2 27 00 00 14 22 00 40 b9 66 8e 8e d2  ..~.'...".@.f...
+	0x01e0 26 8c ae f2 5f 00 06 6b e1 00 00 54 26 08 40 79  &..._..k...T&.@y
+	0x01f0 a7 6e 8e d2 df 00 07 6b 61 00 00 54 e1 03 7f b2  .n.....ka..T....
+	0x0200 1c 00 00 14 86 ae 8c d2 c6 2d ac f2 5f 00 06 6b  .........-.._..k
+	0x0210 e1 02 00 54 21 08 40 79 c2 8d 8e d2 3f 00 02 6b  ...T!.@y....?..k
+	0x0220 61 02 00 54 a1 00 80 d2 12 00 00 14 5f 1c 00 f1  a..T........_...
+	0x0230 e1 01 00 54 22 00 40 b9 66 ae 8c d2 46 ce ae f2  ...T".@.f...F...
+	0x0240 5f 00 06 6b 41 01 00 54 22 08 40 79 26 6d 8c d2  _..kA..T".@y&m..
+	0x0250 5f 00 06 6b c1 00 00 54 21 18 40 39 3f 94 01 71  _..k...T!.@9?..q
+	0x0260 61 00 00 54 e1 07 40 b2 02 00 00 14 01 00 80 92  a..T..@.........
+	0x0270 c1 f2 ff b7 1f 00 01 eb 8d f2 ff 54 22 ec 7c d3  ...........T".|.
+	0x0280 e6 c3 00 91 c4 68 22 f8 c2 10 01 8b 45 04 00 f9  .....h".....E...
+	0x0290 e2 03 40 b2 e4 c3 02 91 82 68 21 38 7f 04 00 f1  ..@......h!8....
+	0x02a0 60 00 00 54 63 04 00 d1 88 ff ff 17 f5 a3 04 91  `..Tc...........
+	0x02b0 f4 c3 00 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  ..........>..c..
+	0x02c0 00 00 00 94 fd 23 00 d1 e0 5b 40 f9 e0 d7 00 f9  .....#...[@.....
+	0x02d0 f5 a3 04 91 f4 c3 00 91 9b 00 00 10 fd ef 3e a9  ..............>.
+	0x02e0 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e0 5b 40 f9  .c.......#...[@.
+	0x02f0 e0 d7 00 f9 fd fb 7f a9 ff 83 04 91 c0 03 5f d6  .............._.
+	0x0300 e2 03 7d b2 00 00 00 94 1f 20 03 d5 e0 07 09 a9  ..}...... ......
+	0x0310 e3 03 1e aa 00 00 00 94 e0 07 49 a9 39 ff ff 17  ..........I.9...
+	rel 48+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 76+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 120+4 t=R_CALLARM64 runtime.duffzero+232
+	rel 136+8 t=R_ADDRARM64 type:map[string]string+0
+	rel 144+4 t=R_CALLARM64 runtime.mapIterStart+0
+	rel 176+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 208+4 t=R_CALLARM64 runtime.mapIterNext+0
+	rel 704+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 740+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 772+4 t=R_CALLARM64 runtime.panicSliceAlen+0
+	rel 788+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.IndexEach STEXT size=240 args=0xa8 locals=0x128 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:153)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.IndexEach(SB), ABIInternal, $304-168
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:153)	SUB	$176, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:153)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:153)	BLS	200
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:153)	SUB	$304, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:153)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:153)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+136(FP)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:153)	FUNCDATA	$0, gclocals·zyaHvurr/TDUH2lqsABqyQ==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:153)	FUNCDATA	$1, gclocals·Hlf1owPZj0leoqvyGYZICw==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:153)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.IndexEach.arginfo1(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:153)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.IndexEach.argliveinfo(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$3, $1
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$3, $2
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R20
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-2
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:153)	ADR	60, runtime.duffzero+224(R27)(R27)(REG)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:153)	STP	(R29, R27), -24(RSP)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:153)	SUB	$24, RSP, R29
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:153)	DUFFZERO	runtime.duffzero(SB)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:153)	SUB	$8, RSP, R29
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-1
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	ZR, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$1, $1
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:154)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex(SB)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+160(FP), R1
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:154)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-136(SP), R21
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$8(RSP), R20
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-2
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:154)	ADR	104, runtime.duffcopy+448(R27)(R27)(REG)
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:154)	STP	(R29, R27), -24(RSP)
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$24, RSP, R29
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:154)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$8, RSP, R29
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-1
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	136(RSP), R3
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-8(SP)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-136(SP), R20
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-2
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:154)	ADR	140, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:154)	STP	(R29, R27), -24(RSP)
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$24, RSP, R29
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:154)	DUFFCOPY	runtime.duffcopy(SB)
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$8, RSP, R29
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-1
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-8(SP), R3
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0(FP), R21
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-136(SP), R20
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-2
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:154)	ADR	176, runtime.duffcopy+448(R27)(R27)(REG)
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:154)	STP	(R29, R27), -24(RSP)
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$24, RSP, R29
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:154)	DUFFCOPY	runtime.duffcopy(SB)
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:154)	SUB	$8, RSP, R29
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:154)	PCDATA	$0, $-1
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_4-8(SP), R3
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:154)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.~r0+128(FP)
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:154)	LDP	-8(RSP), (R29, R30)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:154)	ADD	$304, RSP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:154)	RET	(R30)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:154)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$1, $-1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-2
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:153)	STP	(R0, R1), 144(RSP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:153)	STP	(R2, R3), 160(RSP)
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:153)	MOVD	R30, R3
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:153)	CALL	runtime.morestack_noctxt(SB)
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:153)	PCDATA	$0, $-1
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:153)	LDP	144(RSP), (R0, R1)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:153)	LDP	160(RSP), (R2, R3)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:153)	JMP	0
+	0x0000 90 0b 40 f9 f1 c3 02 d1 3f 02 10 eb e9 05 00 54  ..@.....?......T
+	0x0010 f4 c3 04 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  ......?......#..
+	0x0020 e0 e3 00 f9 e3 ef 00 f9 f4 e3 04 91 9b 00 00 10  ................
+	0x0030 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0040 ff df 00 f9 00 00 00 94 e1 ef 40 f9 00 00 00 94  ..........@.....
+	0x0050 f5 83 02 91 f4 23 00 91 9b 00 00 10 fd ef 3e a9  .....#........>.
+	0x0060 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e3 47 40 f9  .c.......#...G@.
+	0x0070 e3 93 00 f9 f5 e3 04 91 f4 83 02 91 9b 00 00 10  ................
+	0x0080 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0090 e3 93 40 f9 e3 df 00 f9 f5 e3 04 91 f4 83 02 91  ..@.............
+	0x00a0 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x00b0 fd 23 00 d1 e3 93 40 f9 e3 df 00 f9 fd fb 7f a9  .#....@.........
+	0x00c0 ff c3 04 91 c0 03 5f d6 e0 07 09 a9 e2 0f 0a a9  ......_.........
+	0x00d0 e3 03 1e aa 00 00 00 94 e0 07 49 a9 e2 0f 4a a9  ..........I...J.
+	0x00e0 c8 ff ff 17 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 56+4 t=R_CALLARM64 runtime.duffzero+224
+	rel 68+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex+0
+	rel 76+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated+0
+	rel 100+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 136+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 172+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 212+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume STEXT nosplit size=96 args=0x88 locals=0x18 funcid=0x0 align=0x0 leaf
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:161)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume(SB), NOSPLIT|LEAF|ABIInternal, $32-136
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:161)	MOVD.W	R30, -32(RSP)
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:161)	MOVD	R29, -8(RSP)
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:161)	SUB	$8, RSP, R29
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:161)	FUNCDATA	$0, gclocals·/ibW19ShQaWW7er/AoMF9Q==(SB)
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:161)	FUNCDATA	$1, gclocals·J26BEvPExEQhJvjp9E8Whg==(SB)
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:161)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume.arginfo1(SB)
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:163)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result+128(FP), R1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:163)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP)
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:163)	MOVD	ZR, R0
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:165)	MOVD	ZR, R1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:163)	JMP	36
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:163)	ADD	$1, R0, R0
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:163)	CMP	$8, R0
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:163)	BGE	80
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:163)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP), R2
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:163)	MOVBU	(R2)(R0), R3
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:164)	TBZ	$0, R3, 32
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:165)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result(FP), R3
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:165)	ADD	R0<<4, R3, R3
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:165)	MOVD	8(R3), R3
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:165)	ADD	R1, R3, R3
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:165)	ADD	$1, R3, R1
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:165)	JMP	32
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:168)	MOVD	R1, R0
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:168)	ADD	$24, RSP, R29
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:168)	ADD	$32, RSP
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:168)	RET	(R30)
+	0x0000 fe 0f 1e f8 fd 83 1f f8 fd 23 00 d1 e1 57 40 f9  .........#...W@.
+	0x0010 e1 0b 00 f9 e0 03 1f aa e1 03 1f aa 02 00 00 14  ................
+	0x0020 00 04 00 91 1f 20 00 f1 4a 01 00 54 e2 43 00 91  ..... ..J..T.C..
+	0x0030 43 68 60 38 63 ff 07 36 e3 a3 00 91 63 10 00 8b  Ch`8c..6....c...
+	0x0040 63 04 40 f9 63 00 01 8b 61 04 00 91 f5 ff ff 17  c.@.c...a.......
+	0x0050 e0 03 01 aa fd 63 00 91 ff 83 00 91 c0 03 5f d6  .....c........_.
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeated STEXT size=240 args=0x28 locals=0x148 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:176)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeated(SB), ABIInternal, $336-40
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:176)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:176)	SUB	$208, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:176)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:176)	BLS	200
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:176)	SUB	$336, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:176)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:176)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:176)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:176)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:176)	FUNCDATA	$1, gclocals·Hlf1owPZj0leoqvyGYZICw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:176)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeated.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:176)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeated.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+16(FP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:178)	PCDATA	$3, $2
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:181)	MOVD	ZR, R5
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:178)	JMP	176
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:181)	MOVD	R5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP)
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:179)	PCDATA	$1, $0
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:179)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated(SB)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-136(SP), R21
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	$8(RSP), R20
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:179)	PCDATA	$0, $-2
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:179)	ADR	92, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:179)	STP	(R29, R27), -24(RSP)
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:179)	SUB	$24, RSP, R29
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:179)	DUFFCOPY	runtime.duffcopy(SB)
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:179)	SUB	$8, RSP, R29
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:179)	PCDATA	$0, $-1
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	136(RSP), R4
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	$8(RSP), R21
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-136(SP), R20
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:179)	PCDATA	$0, $-2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:179)	ADR	128, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:179)	STP	(R29, R27), -24(RSP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:179)	SUB	$24, RSP, R29
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:179)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:179)	SUB	$8, RSP, R29
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:179)	PCDATA	$0, $-1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP), R4
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	R4, 136(RSP)
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:179)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume(SB)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP), R4
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:179)	ADD	R4, R0, R5
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:178)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP), R4
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:178)	SUB	$1, R4, R4
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP), R0
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP), R1
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+16(FP), R2
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:179)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP), R3
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:178)	CMP	$0, R4
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:178)	BGT	56
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:181)	MOVD	R5, R0
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:181)	LDP	-8(RSP), (R29, R30)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:181)	ADD	$336, RSP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:181)	RET	(R30)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:181)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$1, $-1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-2
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:176)	STP	(R0, R1), 8(RSP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:176)	STP	(R2, R3), 24(RSP)
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:176)	MOVD	R4, 40(RSP)
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:176)	MOVD	R30, R3
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:176)	CALL	runtime.morestack_noctxt(SB)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:176)	PCDATA	$0, $-1
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:176)	LDP	8(RSP), (R0, R1)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:176)	LDP	24(RSP), (R2, R3)
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:176)	MOVD	40(RSP), R4
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:176)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 03 d1 3f 02 10 eb e9 05 00 54  ..@..C..?......T
+	0x0010 f4 43 05 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  .C....?......#..
+	0x0020 e3 bb 00 f9 e2 b7 00 f9 e1 b3 00 f9 e0 af 00 f9  ................
+	0x0030 e5 03 1f aa 1f 00 00 14 e4 5f 00 f9 e5 5b 00 f9  ........._...[..
+	0x0040 00 00 00 94 f5 03 03 91 f4 23 00 91 9b 00 00 10  .........#......
+	0x0050 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0060 e4 47 40 f9 e4 a3 00 f9 f5 23 00 91 f4 03 03 91  .G@......#......
+	0x0070 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0080 fd 23 00 d1 e4 a3 40 f9 e4 47 00 f9 00 00 00 94  .#....@..G......
+	0x0090 e4 5b 40 f9 05 00 04 8b e4 5f 40 f9 84 04 00 d1  .[@......_@.....
+	0x00a0 e0 af 40 f9 e1 b3 40 f9 e2 b7 40 f9 e3 bb 40 f9  ..@...@...@...@.
+	0x00b0 9f 00 00 f1 2c fc ff 54 e0 03 05 aa fd fb 7f a9  ....,..T........
+	0x00c0 ff 43 05 91 c0 03 5f d6 e0 87 00 a9 e2 8f 01 a9  .C...._.........
+	0x00d0 e4 17 00 f9 e3 03 1e aa 00 00 00 94 e0 87 40 a9  ..............@.
+	0x00e0 e2 8f 41 a9 e4 17 40 f9 c6 ff ff 17 00 00 00 00  ..A...@.........
+	rel 64+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated+0
+	rel 88+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 124+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 140+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume+0
+	rel 216+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeatedNoise STEXT size=240 args=0x28 locals=0x148 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:185)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeatedNoise(SB), ABIInternal, $336-40
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:185)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:185)	SUB	$208, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:185)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:185)	BLS	200
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:185)	SUB	$336, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:185)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:185)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:185)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:185)	FUNCDATA	$0, gclocals·wvjpxkknJ4nY1JtrArJJaw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:185)	FUNCDATA	$1, gclocals·Hlf1owPZj0leoqvyGYZICw==(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:185)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeatedNoise.arginfo1(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:185)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchRepeatedNoise.argliveinfo(SB)
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$3, $1
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+16(FP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:187)	PCDATA	$3, $2
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:190)	MOVD	ZR, R5
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:187)	JMP	176
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:190)	MOVD	R5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP)
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:188)	PCDATA	$1, $0
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:188)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated(SB)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-136(SP), R21
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	$8(RSP), R20
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:188)	PCDATA	$0, $-2
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:188)	ADR	92, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:188)	STP	(R29, R27), -24(RSP)
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:188)	SUB	$24, RSP, R29
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:188)	DUFFCOPY	runtime.duffcopy(SB)
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:188)	SUB	$8, RSP, R29
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:188)	PCDATA	$0, $-1
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	136(RSP), R4
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	$8(RSP), R21
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-136(SP), R20
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:188)	PCDATA	$0, $-2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:188)	ADR	128, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:188)	STP	(R29, R27), -24(RSP)
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:188)	SUB	$24, RSP, R29
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:188)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:188)	SUB	$8, RSP, R29
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:188)	PCDATA	$0, $-1
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_5-8(SP), R4
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	R4, 136(RSP)
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:188)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume(SB)
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP), R4
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:188)	ADD	R4, R0, R5
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:187)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP), R4
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:187)	SUB	$1, R4, R4
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP), R0
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+8(FP), R1
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs+16(FP), R2
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:188)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP), R3
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:187)	CMP	$0, R4
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:187)	BGT	56
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:190)	MOVD	R5, R0
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:190)	LDP	-8(RSP), (R29, R30)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:190)	ADD	$336, RSP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:190)	RET	(R30)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:190)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$1, $-1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-2
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:185)	STP	(R0, R1), 8(RSP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:185)	STP	(R2, R3), 24(RSP)
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:185)	MOVD	R4, 40(RSP)
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:185)	MOVD	R30, R3
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:185)	CALL	runtime.morestack_noctxt(SB)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:185)	PCDATA	$0, $-1
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:185)	LDP	8(RSP), (R0, R1)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:185)	LDP	24(RSP), (R2, R3)
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:185)	MOVD	40(RSP), R4
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:185)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 03 d1 3f 02 10 eb e9 05 00 54  ..@..C..?......T
+	0x0010 f4 43 05 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  .C....?......#..
+	0x0020 e3 bb 00 f9 e2 b7 00 f9 e1 b3 00 f9 e0 af 00 f9  ................
+	0x0030 e5 03 1f aa 1f 00 00 14 e4 5f 00 f9 e5 5b 00 f9  ........._...[..
+	0x0040 00 00 00 94 f5 03 03 91 f4 23 00 91 9b 00 00 10  .........#......
+	0x0050 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0060 e4 47 40 f9 e4 a3 00 f9 f5 23 00 91 f4 03 03 91  .G@......#......
+	0x0070 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+	0x0080 fd 23 00 d1 e4 a3 40 f9 e4 47 00 f9 00 00 00 94  .#....@..G......
+	0x0090 e4 5b 40 f9 05 00 04 8b e4 5f 40 f9 84 04 00 d1  .[@......_@.....
+	0x00a0 e0 af 40 f9 e1 b3 40 f9 e2 b7 40 f9 e3 bb 40 f9  ..@...@...@...@.
+	0x00b0 9f 00 00 f1 2c fc ff 54 e0 03 05 aa fd fb 7f a9  ....,..T........
+	0x00c0 ff 43 05 91 c0 03 5f d6 e0 87 00 a9 e2 8f 01 a9  .C...._.........
+	0x00d0 e4 17 00 f9 e3 03 1e aa 00 00 00 94 e0 87 40 a9  ..............@.
+	0x00e0 e2 8f 41 a9 e4 17 40 f9 c6 ff ff 17 00 00 00 00  ..A...@.........
+	rel 64+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceRepeated+0
+	rel 88+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 124+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 140+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume+0
+	rel 216+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchIndexed STEXT size=240 args=0x28 locals=0x148 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:194)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchIndexed(SB), ABIInternal, $336-40
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:194)	SUB	$208, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:194)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:194)	BLS	200
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:194)	SUB	$336, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:194)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:194)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:194)	FUNCDATA	$0, gclocals·Z8zdw/dq+fE82FieA9ctlQ==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:194)	FUNCDATA	$1, gclocals·Ck3WOsJ6JLWlDNYQqcFk/w==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:194)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchIndexed.arginfo1(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:194)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchIndexed.argliveinfo(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$3, $1
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:197)	MOVD	R3, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:197)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.rounds+32(FP)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:197)	PCDATA	$3, $2
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:195)	PCDATA	$1, $1
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:195)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex(SB)
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:195)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.index-144(SP)
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:197)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.rounds+32(FP), R1
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:200)	MOVD	ZR, R2
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:197)	JMP	176
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:197)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_10-152(SP)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:200)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-160(SP)
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.k+24(FP), R1
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:198)	PCDATA	$1, $2
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:198)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated(SB)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_6-136(SP), R21
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	$8(RSP), R20
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:198)	PCDATA	$0, $-2
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:198)	ADR	104, runtime.duffcopy+448(R27)(R27)(REG)
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:198)	STP	(R29, R27), -24(RSP)
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:198)	SUB	$24, RSP, R29
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:198)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:198)	SUB	$8, RSP, R29
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:198)	PCDATA	$0, $-1
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	136(RSP), R2
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	R2, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_6-8(SP)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	$8(RSP), R21
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_6-136(SP), R20
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:198)	PCDATA	$0, $-2
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:198)	ADR	140, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:198)	STP	(R29, R27), -24(RSP)
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:198)	SUB	$24, RSP, R29
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:198)	DUFFCOPY	runtime.duffcopy(SB)
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:198)	SUB	$8, RSP, R29
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:198)	PCDATA	$0, $-1
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_6-8(SP), R2
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	R2, 136(RSP)
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:198)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume(SB)
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-160(SP), R2
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:198)	ADD	R0, R2, R2
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:197)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_10-152(SP), R3
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:197)	SUB	$1, R3, R1
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:198)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.index-144(SP), R0
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:197)	CMP	$0, R1
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:197)	BGT	64
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:200)	MOVD	R2, R0
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:200)	LDP	-8(RSP), (R29, R30)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:200)	ADD	$336, RSP
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:200)	RET	(R30)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:200)	NOP
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$1, $-1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-2
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:194)	STP	(R0, R1), 8(RSP)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:194)	STP	(R2, R3), 24(RSP)
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	R4, 40(RSP)
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	R30, R3
+	0x00d8 00216 ($REPO/topics/19-repeated-lookup/lookup.go:194)	CALL	runtime.morestack_noctxt(SB)
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:194)	PCDATA	$0, $-1
+	0x00dc 00220 ($REPO/topics/19-repeated-lookup/lookup.go:194)	LDP	8(RSP), (R0, R1)
+	0x00e0 00224 ($REPO/topics/19-repeated-lookup/lookup.go:194)	LDP	24(RSP), (R2, R3)
+	0x00e4 00228 ($REPO/topics/19-repeated-lookup/lookup.go:194)	MOVD	40(RSP), R4
+	0x00e8 00232 ($REPO/topics/19-repeated-lookup/lookup.go:194)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 03 d1 3f 02 10 eb e9 05 00 54  ..@..C..?......T
+	0x0010 f4 43 05 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  .C....?......#..
+	0x0020 e0 af 00 f9 e3 bb 00 f9 e4 bf 00 f9 00 00 00 94  ................
+	0x0030 e0 5f 00 f9 e1 bf 40 f9 e2 03 1f aa 1d 00 00 14  ._....@.........
+	0x0040 e1 5b 00 f9 e2 57 00 f9 e1 bb 40 f9 00 00 00 94  .[...W....@.....
+	0x0050 f5 03 03 91 f4 23 00 91 9b 00 00 10 fd ef 3e a9  .....#........>.
+	0x0060 fd 63 00 d1 00 00 00 94 fd 23 00 d1 e2 47 40 f9  .c.......#...G@.
+	0x0070 e2 a3 00 f9 f5 23 00 91 f4 03 03 91 9b 00 00 10  .....#..........
+	0x0080 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0090 e2 a3 40 f9 e2 47 00 f9 00 00 00 94 e2 57 40 f9  ..@..G.......W@.
+	0x00a0 42 00 00 8b e3 5b 40 f9 61 04 00 d1 e0 5f 40 f9  B....[@.a...._@.
+	0x00b0 3f 00 00 f1 6c fc ff 54 e0 03 02 aa fd fb 7f a9  ?...l..T........
+	0x00c0 ff 43 05 91 c0 03 5f d6 e0 87 00 a9 e2 8f 01 a9  .C...._.........
+	0x00d0 e4 17 00 f9 e3 03 1e aa 00 00 00 94 e0 87 40 a9  ..............@.
+	0x00e0 e2 8f 41 a9 e4 17 40 f9 c6 ff ff 17 00 00 00 00  ..A...@.........
+	rel 44+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BuildIndex+0
+	rel 76+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.MapRepeated+0
+	rel 100+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 136+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 152+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume+0
+	rel 216+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+
+github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchExtracted STEXT size=224 args=0x28 locals=0x148 funcid=0x0 align=0x0
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:204)	TEXT	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchExtracted(SB), ABIInternal, $336-40
+	0x0000 00000 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	16(g), R16
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-2
+	0x0004 00004 ($REPO/topics/19-repeated-lookup/lookup.go:204)	SUB	$208, RSP, R17
+	0x0008 00008 ($REPO/topics/19-repeated-lookup/lookup.go:204)	CMP	R16, R17
+	0x000c 00012 ($REPO/topics/19-repeated-lookup/lookup.go:204)	BLS	180
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-1
+	0x0010 00016 ($REPO/topics/19-repeated-lookup/lookup.go:204)	SUB	$336, RSP, R20
+	0x0014 00020 ($REPO/topics/19-repeated-lookup/lookup.go:204)	STP	(R29, R30), -8(R20)
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-2
+	0x0018 00024 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	R20, RSP
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-1
+	0x001c 00028 ($REPO/topics/19-repeated-lookup/lookup.go:204)	SUB	$8, RSP, R29
+	0x0020 00032 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.attrs(FP)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:204)	FUNCDATA	$0, gclocals·Z8zdw/dq+fE82FieA9ctlQ==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:204)	FUNCDATA	$1, gclocals·W9PeLqvjmUP8qT0EWKm1bA==(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:204)	FUNCDATA	$5, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchExtracted.arginfo1(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:204)	FUNCDATA	$6, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.BatchExtracted.argliveinfo(SB)
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$3, $1
+	0x0024 00036 ($REPO/topics/19-repeated-lookup/lookup.go:207)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.rounds+32(FP)
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:207)	PCDATA	$3, $2
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:205)	PCDATA	$1, $1
+	0x0028 00040 ($REPO/topics/19-repeated-lookup/lookup.go:205)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan(SB)
+	0x002c 00044 ($REPO/topics/19-repeated-lookup/lookup.go:205)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result-136(SP), R21
+	0x0030 00048 ($REPO/topics/19-repeated-lookup/lookup.go:205)	MOVD	$8(RSP), R20
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:205)	PCDATA	$0, $-2
+	0x0034 00052 ($REPO/topics/19-repeated-lookup/lookup.go:205)	ADR	68, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0038 00056 ($REPO/topics/19-repeated-lookup/lookup.go:205)	STP	(R29, R27), -24(RSP)
+	0x003c 00060 ($REPO/topics/19-repeated-lookup/lookup.go:205)	SUB	$24, RSP, R29
+	0x0040 00064 ($REPO/topics/19-repeated-lookup/lookup.go:205)	DUFFCOPY	runtime.duffcopy(SB)
+	0x0044 00068 ($REPO/topics/19-repeated-lookup/lookup.go:205)	SUB	$8, RSP, R29
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:205)	PCDATA	$0, $-1
+	0x0048 00072 ($REPO/topics/19-repeated-lookup/lookup.go:205)	MOVD	136(RSP), R4
+	0x004c 00076 ($REPO/topics/19-repeated-lookup/lookup.go:205)	MOVD	R4, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result-8(SP)
+	0x0050 00080 ($REPO/topics/19-repeated-lookup/lookup.go:207)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.rounds+32(FP), R0
+	0x0054 00084 ($REPO/topics/19-repeated-lookup/lookup.go:210)	MOVD	ZR, R1
+	0x0058 00088 ($REPO/topics/19-repeated-lookup/lookup.go:207)	JMP	156
+	0x005c 00092 ($REPO/topics/19-repeated-lookup/lookup.go:207)	MOVD	R0, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP)
+	0x0060 00096 ($REPO/topics/19-repeated-lookup/lookup.go:210)	MOVD	R1, github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP)
+	0x0064 00100 ($REPO/topics/19-repeated-lookup/lookup.go:208)	MOVD	$8(RSP), R21
+	0x0068 00104 ($REPO/topics/19-repeated-lookup/lookup.go:208)	MOVD	$github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result-136(SP), R20
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:208)	PCDATA	$0, $-2
+	0x006c 00108 ($REPO/topics/19-repeated-lookup/lookup.go:208)	ADR	124, runtime.duffcopy+448(R27)(R27)(REG)
+	0x0070 00112 ($REPO/topics/19-repeated-lookup/lookup.go:208)	STP	(R29, R27), -24(RSP)
+	0x0074 00116 ($REPO/topics/19-repeated-lookup/lookup.go:208)	SUB	$24, RSP, R29
+	0x0078 00120 ($REPO/topics/19-repeated-lookup/lookup.go:208)	DUFFCOPY	runtime.duffcopy(SB)
+	0x007c 00124 ($REPO/topics/19-repeated-lookup/lookup.go:208)	SUB	$8, RSP, R29
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:208)	PCDATA	$0, $-1
+	0x0080 00128 ($REPO/topics/19-repeated-lookup/lookup.go:208)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.result-8(SP), R0
+	0x0084 00132 ($REPO/topics/19-repeated-lookup/lookup.go:208)	MOVD	R0, 136(RSP)
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:208)	PCDATA	$1, $2
+	0x0088 00136 ($REPO/topics/19-repeated-lookup/lookup.go:208)	CALL	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume(SB)
+	0x008c 00140 ($REPO/topics/19-repeated-lookup/lookup.go:208)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.sum-152(SP), R1
+	0x0090 00144 ($REPO/topics/19-repeated-lookup/lookup.go:208)	ADD	R1, R0, R1
+	0x0094 00148 ($REPO/topics/19-repeated-lookup/lookup.go:207)	MOVD	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup..autotmp_9-144(SP), R0
+	0x0098 00152 ($REPO/topics/19-repeated-lookup/lookup.go:207)	SUB	$1, R0, R0
+	0x009c 00156 ($REPO/topics/19-repeated-lookup/lookup.go:207)	CMP	$0, R0
+	0x00a0 00160 ($REPO/topics/19-repeated-lookup/lookup.go:207)	BGT	92
+	0x00a4 00164 ($REPO/topics/19-repeated-lookup/lookup.go:210)	MOVD	R1, R0
+	0x00a8 00168 ($REPO/topics/19-repeated-lookup/lookup.go:210)	LDP	-8(RSP), (R29, R30)
+	0x00ac 00172 ($REPO/topics/19-repeated-lookup/lookup.go:210)	ADD	$336, RSP
+	0x00b0 00176 ($REPO/topics/19-repeated-lookup/lookup.go:210)	RET	(R30)
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:210)	NOP
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$1, $-1
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-2
+	0x00b4 00180 ($REPO/topics/19-repeated-lookup/lookup.go:204)	STP	(R0, R1), 8(RSP)
+	0x00b8 00184 ($REPO/topics/19-repeated-lookup/lookup.go:204)	STP	(R2, R3), 24(RSP)
+	0x00bc 00188 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	R4, 40(RSP)
+	0x00c0 00192 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	R30, R3
+	0x00c4 00196 ($REPO/topics/19-repeated-lookup/lookup.go:204)	CALL	runtime.morestack_noctxt(SB)
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:204)	PCDATA	$0, $-1
+	0x00c8 00200 ($REPO/topics/19-repeated-lookup/lookup.go:204)	LDP	8(RSP), (R0, R1)
+	0x00cc 00204 ($REPO/topics/19-repeated-lookup/lookup.go:204)	LDP	24(RSP), (R2, R3)
+	0x00d0 00208 ($REPO/topics/19-repeated-lookup/lookup.go:204)	MOVD	40(RSP), R4
+	0x00d4 00212 ($REPO/topics/19-repeated-lookup/lookup.go:204)	JMP	0
+	0x0000 90 0b 40 f9 f1 43 03 d1 3f 02 10 eb 49 05 00 54  ..@..C..?...I..T
+	0x0010 f4 43 05 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  .C....?......#..
+	0x0020 e0 af 00 f9 e4 bf 00 f9 00 00 00 94 f5 03 03 91  ................
+	0x0030 f4 23 00 91 9b 00 00 10 fd ef 3e a9 fd 63 00 d1  .#........>..c..
+	0x0040 00 00 00 94 fd 23 00 d1 e4 47 40 f9 e4 a3 00 f9  .....#...G@.....
+	0x0050 e0 bf 40 f9 e1 03 1f aa 11 00 00 14 e0 5f 00 f9  ..@.........._..
+	0x0060 e1 5b 00 f9 f5 23 00 91 f4 03 03 91 9b 00 00 10  .[...#..........
+	0x0070 fd ef 3e a9 fd 63 00 d1 00 00 00 94 fd 23 00 d1  ..>..c.......#..
+	0x0080 e0 a3 40 f9 e0 47 00 f9 00 00 00 94 e1 5b 40 f9  ..@..G.......[@.
+	0x0090 01 00 01 8b e0 5f 40 f9 00 04 00 d1 1f 00 00 f1  ....._@.........
+	0x00a0 ec fd ff 54 e0 03 01 aa fd fb 7f a9 ff 43 05 91  ...T.........C..
+	0x00b0 c0 03 5f d6 e0 87 00 a9 e2 8f 01 a9 e4 17 00 f9  .._.............
+	0x00c0 e3 03 1e aa 00 00 00 94 e0 87 40 a9 e2 8f 41 a9  ..........@...A.
+	0x00d0 e4 17 40 f9 cb ff ff 17 00 00 00 00 00 00 00 00  ..@.............
+	rel 40+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.SliceScan+0
+	rel 64+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 120+4 t=R_CALLARM64 runtime.duffcopy+448
+	rel 136+4 t=R_CALLARM64 github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup.consume+0
+	rel 196+4 t=R_CALLARM64 runtime.morestack_noctxt+0

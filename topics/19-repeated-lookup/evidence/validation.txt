@@ -1,0 +1,47 @@
+$ go test -v ./topics/19-repeated-lookup
+=== RUN   TestExtraction
+--- PASS: TestExtraction (0.00s)
+=== RUN   TestSnapshot
+--- PASS: TestSnapshot (0.00s)
+=== RUN   TestSlot
+--- PASS: TestSlot (0.00s)
+=== RUN   TestBatch
+--- PASS: TestBatch (0.00s)
+=== RUN   TestVerify_Visits
+    lookup_test.go:232: n=128 k=8 layout=tail: repeated=996 scan=128 visits
+    lookup_test.go:232: n=128 k=8 layout=absent: repeated=1024 scan=128 visits
+    lookup_test.go:232: n=128 k=8 layout=front: repeated=36 scan=8 visits
+    lookup_test.go:232: n=128 k=1 layout=front: repeated=1 scan=1 visits
+    lookup_test.go:232: n=128 k=1 layout=tail: repeated=121 scan=121 visits
+    lookup_test.go:232: n=128 k=1 layout=absent: repeated=128 scan=128 visits
+--- PASS: TestVerify_Visits (0.00s)
+=== RUN   FuzzExtraction
+=== RUN   FuzzExtraction/seed#0
+=== RUN   FuzzExtraction/seed#1
+--- PASS: FuzzExtraction (0.00s)
+    --- PASS: FuzzExtraction/seed#0 (0.00s)
+    --- PASS: FuzzExtraction/seed#1 (0.00s)
+PASS
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup	0.957s
+
+$ go test -race ./topics/19-repeated-lookup
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup	2.379s
+
+$ go test ./topics/19-repeated-lookup -run '^$' -fuzz '^FuzzExtraction$' -fuzztime=5s -parallel=1
+fuzz: elapsed: 0s, gathering baseline coverage: 0/2 completed
+fuzz: elapsed: 2s, gathering baseline coverage: 2/2 completed, now fuzzing with 1 workers
+fuzz: elapsed: 3s, execs: 2910 (970/sec), new interesting: 30 (total: 32)
+fuzz: elapsed: 6s, execs: 3362 (155/sec), new interesting: 33 (total: 35)
+PASS
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup	7.556s
+
+$ make check
+go vet ./...
+go test ./...
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/01-escape-analysis	(cached) [no tests to run]
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/02-slice-growth	(cached)
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/03-map-internals	(cached)
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/04-strings	(cached)
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/15-rcu-cache	(cached)
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/18-bitmap-filter	(cached)
+ok  	github.com/XiaoWeiKIN/golang-benchmark/topics/19-repeated-lookup	0.866s

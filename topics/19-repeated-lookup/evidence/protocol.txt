@@ -1,0 +1,38 @@
+// Predeclared protocol (2026-09-17), written before running benchmarks.
+// Earlier topic 18 had substantial noise; this is a new experiment, not a
+// retest of it. No timing predictions are inferred from the source application.
+//
+// H1: For 128 entries, eight requested fields at the tail require 996 entry
+//     visits in repeated linear search, versus 128 in one scan. With all fields
+//     absent the counts are 1024 and 128. A first-field-at-front lookup visits
+//     one entry in either algorithm. TestVerify_Visits checks these formulas.
+// H2: SliceRepeated, SliceScan, MapRepeated and MapScan allocate zero bytes per
+//     extraction; IndexEach allocates for its new map. A measured allocation in
+//     a direct/scan path or zero allocations in IndexEach refutes this claim.
+// H3: Native map lookup performs k keyed queries; iterating that map can inspect
+//     up to n entries. At n=128,k=1, MapScan is expected to be slower than
+//     MapRepeated beyond same-row noise and uncertainty. Otherwise timing is
+//     inconclusive, even though the algorithmic distinction remains.
+// H4: Eight fields at the tail of 128 entries should favor SliceScan over
+//     SliceRepeated beyond same-row noise and uncertainty. One field at the
+//     front has no visit-count saving; no speedup is promised for that case.
+// H5: Per-record index construction is paid once in BatchIndexed, so B/op and
+//     allocs/op stay constant as rounds grows 1 -> 8 -> 32. BatchExtracted and
+//     BatchRepeated stay at zero allocation. Reusing a fixed-field Result should
+//     avoid later searches, but does not support arbitrary new query fields.
+//
+// One complete batch: -cpu=1 -count=8 -benchtime=200ms, no selective reruns or
+// sample exclusions. Report every median and benchstat 95% interval. For a
+// timing claim require a gap beyond its matched duplicate-function noise AND
+// non-overlapping intervals; otherwise report inconclusive. No global speedup.
+// Use disjoint full sample ranges as a conservative sufficient condition for
+// non-overlapping intervals; do not infer acceptance from rounded percentages.
+// Extraction: n=16/128, k=1/8, front/tail/shuffled/absent, seven variants.
+// Shuffled uses a deterministic seed (7); map hash seeds/iteration remain random.
+// Batch reuse: n=128,k=8, front/tail, rounds=1/8/32, four variants.
+// One extraction op handles one record. One batch op handles one record with
+// rounds identical consumers; building an index or extracting a Result is timed.
+// Synthetic string-only values; first duplicate wins; empty != absent.
+// noinline preserves callable work; common result-copy/call overhead is included.
+// Source generation and initial native-map conversion are outside b.Loop.
+

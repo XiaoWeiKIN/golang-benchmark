@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-09-17T03:06:14.042909+00:00",
+  "base_revision": "d130a6538d221ce07af19ce478e8c00a6f3101a0",
+  "state": "new uncommitted topic, identified by SHA-256; unrelated existing topic 18 README edit is outside this measurement",
+  "command": "go test ./topics/19-repeated-lookup -run '^$' -bench . -benchmem -cpu=1 -count=8 -benchtime=200ms",
+  "go": "go version go1.25.4 darwin/arm64",
+  "os": "macOS-15.7.3-arm64-arm-64bit",
+  "cpu": "Apple M4",
+  "logical_cpus": "10",
+  "goenv": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "arm64",
+    "GOEXPERIMENT": "",
+    "GOOS": "darwin"
+  },
+  "runtime_env": {
+    "GOGC": "unset (Go default)",
+    "GOMEMLIMIT": "unset (Go default)"
+  },
+  "subject_files": {
+    "topics/19-repeated-lookup/lookup.go": "841ba59540dd6baa69db0f22f7dbbcb5b3cfedaf16c5a921b43f1f2412bc7710",
+    "topics/19-repeated-lookup/lookup_test.go": "2e4e89c1684e269c225bf07e261912b1a6fc94869e1ce5732829665b02e7e256",
+    "go.mod": "5b390c7098f1b622184be63a136aaaa00a32167abc71c454b35f56fabc4529e6"
+  }
+}
